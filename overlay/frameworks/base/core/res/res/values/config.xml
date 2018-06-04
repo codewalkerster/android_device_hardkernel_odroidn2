@@ -99,4 +99,8 @@
     <!-- disable wallpaper, which may consume too much boot time -->
     <!-- cannot disable wallpaper, com.android.settings will crash! -->
     <!--bool name="config_enableWallpaperService">false</bool-->
+
+    <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
+         autodetected from the Configuration. -->
+    <bool name="config_showNavigationBar">true</bool>
 </resources>
