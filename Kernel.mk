@@ -4,7 +4,6 @@
 KERNEL_ROOTDIR := common
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 USE_PREBUILT_KERNEL := false
-WIFI_MODULE := multiwifi
 
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
@@ -101,7 +100,6 @@ $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TAR
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules Image.gz
 #	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
-	$(MAKE) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/hardkernel/common/wifi_driver.mk $(WIFI_MODULE)
 	$(cp-modules)
 	$(media-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
