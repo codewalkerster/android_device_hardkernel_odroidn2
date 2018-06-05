@@ -204,11 +204,6 @@ PRODUCT_COPY_FILES += \
 #
 #########################################################################
 
-#MULTI_WIFI_SUPPORT := true
-WIFI_MODULE := AP6398
-WIFI_BUILD_IN := true
-include device/hardkernel/common/wifi.mk
-
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
 PRODUCT_DEFAULT_WIFI_CHANNELS := 11
@@ -220,12 +215,9 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 #
 #########################################################################
 
-BOARD_HAVE_BLUETOOTH := true
-#MULTI_BLUETOOTH_SUPPORT := true
-BCMBT_SUPPORT := true
-BCM_BLUETOOTH_LPM_ENABLE := true
-include device/hardkernel/common/bluetooth.mk
-
+#BCMBT_SUPPORT := true
+#BCM_BLUETOOTH_LPM_ENABLE := true
+BOARD_HAVE_BLUETOOTH := false
 
 #########################################################################
 #
