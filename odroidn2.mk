@@ -376,6 +376,9 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service
 endif
 
+# Superuser
+PRODUCT_PACKAGES += su
+
 include device/hardkernel/common/gpu/gondul-user-arm64.mk
 
 #########################################################################
