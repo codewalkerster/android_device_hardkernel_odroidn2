@@ -161,3 +161,6 @@ DEVICE_MANIFEST_FILE := device/hardkernel/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/hardkernel/common/compatibility_matrix.xml
 
 BOARD_VNDK_VERSION := current
+
+BOARD_HAVE_ODROID_GPS := true
+BOARD_SUPPORT_EXTERNAL_GPS := true

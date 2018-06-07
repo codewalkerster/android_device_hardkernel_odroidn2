@@ -379,6 +379,9 @@ endif
 # Superuser
 PRODUCT_PACKAGES += su
 
+# GPS
+PRODUCT_PACKAGES += gps.$(PRODUCT_DEVICE)
+
 include device/hardkernel/common/gpu/gondul-user-arm64.mk
 
 #########################################################################
