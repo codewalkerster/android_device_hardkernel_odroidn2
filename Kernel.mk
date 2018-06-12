@@ -1,6 +1,5 @@
 #if use probuilt kernel or build kernel from source code
 -include device/hardkernel/common/media_modules.mk
--include device/hardkernel/common/wifi_modules.mk
 KERNEL_ROOTDIR := common
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 USE_PREBUILT_KERNEL := false
