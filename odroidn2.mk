@@ -217,7 +217,8 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 #BCMBT_SUPPORT := true
 #BCM_BLUETOOTH_LPM_ENABLE := true
-BOARD_HAVE_BLUETOOTH := false
+BOARD_HAVE_BLUETOOTH := true
+include device/hardkernel/common/bluetooth.mk
 
 #########################################################################
 #
