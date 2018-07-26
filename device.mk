@@ -60,7 +60,6 @@ PRODUCT_COPY_FILES += \
     device/hardkernel/$(PRODUCT_DIR)/recovery/init.recovery.odroidn2.rc:root/init.recovery.odroidn2.rc \
     device/hardkernel/$(PRODUCT_DIR)/recovery/recovery.kl:recovery/root/etc/recovery.kl \
     device/hardkernel/$(PRODUCT_DIR)/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
-    device/hardkernel/$(PRODUCT_DIR)/recovery/busybox:recovery/root/sbin/busybox \
     device/hardkernel/$(PRODUCT_DIR)/recovery/remotecfg:recovery/root/sbin/remotecfg \
     device/hardkernel/$(PRODUCT_DIR)/files/remote.cfg:recovery/root/etc/remote.cfg \
     device/hardkernel/$(PRODUCT_DIR)/files/remote.tab1:recovery/root/etc/remote.tab1 \

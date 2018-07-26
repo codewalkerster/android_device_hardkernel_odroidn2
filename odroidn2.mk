@@ -375,6 +375,9 @@ PRODUCT_PACKAGES += gps.$(PRODUCT_DEVICE)
 
 include device/hardkernel/common/gpu/gondul-user-arm64.mk
 
+PRODUCT_PACKAGES += \
+    static_busybox
+
 #########################################################################
 #
 #                                     Auto Patch
