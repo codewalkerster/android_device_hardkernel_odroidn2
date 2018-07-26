@@ -191,6 +191,8 @@ PRODUCT_COPY_FILES += \
 #                                                WiFi
 #
 #########################################################################
+WIFI_MODULE := realtek
+include device/hardkernel/common/wifi.mk
 
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
