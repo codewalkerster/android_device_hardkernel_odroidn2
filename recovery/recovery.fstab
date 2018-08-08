@@ -1,6 +1,5 @@
 #device    mountpoint    fstype    options    flags?    (fstab    version    2)
 /dev/block/bootloader   /bootloader emmc    defaults    defaults
-/dev/block/logo         /logo       emmc    defaults    defaults
 /dev/block/vbmeta       /vbmeta       emmc    defaults    defaults
 /dev/block/recovery     /recovery   emmc    defaults    defaults
 /dev/block/boot         /boot   emmc    defaults    defaults

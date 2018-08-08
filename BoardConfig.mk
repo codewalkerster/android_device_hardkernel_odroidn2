@@ -116,7 +116,6 @@ endif
 endif
 
 TARGET_SUPPORT_USB_BURNING_V2 := true
-TARGET_AMLOGIC_RES_PACKAGE := device/hardkernel/$(PRODUCT_DIR)/logo_img_files
 
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE), true)
 TARGET_RECOVERY_FSTAB := device/hardkernel/$(PRODUCT_DIR)/recovery/recovery_system.fstab
