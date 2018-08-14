@@ -138,7 +138,7 @@ endif
 endif
 endif
 
-BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
+BOARD_CACHEIMAGE_PARTITION_SIZE := 1073741824
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
 
@@ -383,6 +383,8 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     LightningBrowser
 
+# Updater
+PRODUCT_PACKAGES += updater
 #########################################################################
 #
 #                                     Auto Patch
