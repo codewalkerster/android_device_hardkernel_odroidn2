@@ -191,7 +191,7 @@ PRODUCT_COPY_FILES += \
 #                                                WiFi
 #
 #########################################################################
-WIFI_MODULE := realtek
+WIFI_MODULE := rtl8812au
 include device/hardkernel/common/wifi.mk
 
 # Change this to match target country

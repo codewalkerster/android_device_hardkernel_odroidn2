@@ -95,6 +95,7 @@ INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
 $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG)
 	@echo "make Image"
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE)
+	$(MAKE) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/hardkernel/common/wifi_driver.mk $(WIFI_MODULE)
 	$(cp-modules)
 	$(media-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
