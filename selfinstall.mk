@@ -16,8 +16,6 @@
 
 SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
-BOOTLOADER := u-boot.bin
-
 BOOT_IMG := $(PRODUCT_OUT)/boot.img
 DTBS := s922d_odroidn2_android.dtb
 
@@ -81,7 +79,7 @@ $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(BOOTLOADER_MESSAGE) \
 	$(INSTALLED_RECOVERYIMAGE_TARGET) \
-	$(UBOOT_IMAGE) \
+	build_bootloader \
 	$(BOOT_IMG) \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
