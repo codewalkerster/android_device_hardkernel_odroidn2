@@ -1,0 +1,56 @@
+#assert(getprop("ro.build.product" == "odroidn2"));
+
+show_progress(1.0000, 0);
+
+ui_print("\n\nHardkernel's ODROID-N2 Android Update is started...");
+set_progress(0.1000);
+
+ui_print("   Bootloader is flashing...");
+package_extract_file("u-boot.bin", "/tmp/u-boot.bin");
+run_program("/sbin/dd", "if=/tmp/u-boot.bin", "of=/dev/block/bootloader");
+
+set_progress(0.2000);
+
+ui_print("   'boot' partition is flashing...");
+package_extract_file("boot.img", "/tmp/boot.img");
+run_program("/sbin/dd", "if=/tmp/boot.img", "of=/dev/block/boot");
+
+set_progress(0.3000);
+
+ui_print("   dtb image is flashing...");
+package_extract_file("s922d_odroidn2_android.dtb", "/tmp/s922d_odroidn2_android.dtb");
+run_program("/sbin/dd", "if=/tmp/s922d_odroidn2_android.dtb", "of=/dev/block/dtbs");
+
+set_progress(0.4000);
+
+ui_print("   'recovery' partition is flashing...");
+package_extract_file("recovery.img", "/tmp/recovery.img");
+run_program("/sbin/dd", "if=/tmp/recovery.img", "of=/dev/block/recovery");
+
+set_progress(0.5000);
+
+ui_print("   'vendor' partition is extracting...");
+mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
+package_extract_dir("vendor", "/vendor");
+
+set_progress(0.6000);
+
+ui_print("   'system' partition is extracting...");
+mount("ext4", "EMMC", "/dev/block/system", "/system");
+package_extract_dir("system", "/system");
+
+set_progress(0.7000);
+
+ui_print("   'product' partition is extracting...");
+mount("ext4", "EMMC", "/dev/block/product", "/product");
+package_extract_dir("product", "/product");
+
+set_progress(0.8000);
+
+ui_print("   boot.ini.template is copying to /system/etc/");
+package_extract_file("system/etc/boot.ini.template", "/system/etc/boot.ini.template");
+
+set_progress(0.9000);
+
+ui_print("Android update is completed.\nHave fun with ODROID-N2!\n\n");
+set_progress(1.0000);
