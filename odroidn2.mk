@@ -381,7 +381,8 @@ PRODUCT_PACKAGES += \
 # Prebuilt app
 PRODUCT_PACKAGES += \
     CMFileManager \
-    LightningBrowser
+    LightningBrowser \
+    AndroidTerm
 
 # Updater
 PRODUCT_PACKAGES += updater
