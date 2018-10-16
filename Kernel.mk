@@ -99,6 +99,7 @@ $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG)
 	$(cp-modules)
 	$(media-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
+	find $(KERNEL_OUT) -name *.ko | xargs -i cp {} $(KERNEL_KO_OUT)/
 	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 
 kerneltags: $(KERNEL_OUT)
