@@ -89,6 +89,11 @@
         <item>com.android.location.fused</item>
     </string-array>
 
+    <!-- Default value for android:focusableInTouchMode for some framework scrolling containers.
+         ListView/GridView are notably absent since this is their default anyway.
+         Set to true for watch devices. -->
+    <bool name="config_focusScrollContainersInTouchMode">true</bool>
+
     <!-- Whether the device uses the default focus highlight when focus state isn't specified. -->
     <bool name="config_useDefaultFocusHighlight">false</bool>
 
