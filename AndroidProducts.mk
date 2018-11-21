@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/galilei.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/odroidn2.mk

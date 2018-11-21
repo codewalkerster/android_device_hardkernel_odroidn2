@@ -1,3 +1,3 @@
-add_lunch_combo galilei-eng
-add_lunch_combo galilei-user
-add_lunch_combo galilei-userdebug
+add_lunch_combo odroidn2-eng
+add_lunch_combo odroidn2-user
+add_lunch_combo odroidn2-userdebug

@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Amlogic Inc
+# Copyright (C) 2018 HardKernel Co., Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # build for Meson reference board.
 #
 
-PRODUCT_DIR := galilei
+PRODUCT_DIR := odroidn2
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
@@ -26,15 +26,15 @@ PRODUCT_DIR := galilei
 # Inherit from those products. Most specific first.
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 ifeq ($(TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE), true)
-$(call inherit-product, device/amlogic/common/dynamic_zygote_seondary/dynamic_zygote_64_bit.mk)
+$(call inherit-product, device/hardkernel/common/dynamic_zygote_seondary/dynamic_zygote_64_bit.mk)
 else
 $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
 
-$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
-$(call inherit-product, device/amlogic/common/products/mbox/product_mbox.mk)
-$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
+$(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/vendor_prop.mk)
+$(call inherit-product, device/hardkernel/common/products/mbox/product_mbox.mk)
+$(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
 TARGET_WITH_MEDIA_EXT_LEVEL := 3
@@ -60,22 +60,22 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
 endif
 endif
 endif
-# galilei:
+# odroidn2:
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.hdmi.device_type=4 \
         persist.sys.hdmi.keep_awake=false
 
-PRODUCT_NAME := galilei
-PRODUCT_DEVICE := galilei
-PRODUCT_BRAND := Droidlogic
-PRODUCT_MODEL := galilei
-PRODUCT_MANUFACTURER := Droidlogic
+PRODUCT_NAME := odroidn2
+PRODUCT_DEVICE := odroidn2
+PRODUCT_BRAND := ODROID
+PRODUCT_MODEL := odroidn2
+PRODUCT_MANUFACTURER := HardKernel Co., Ltd.
 
 TARGET_KERNEL_BUILT_FROM_SOURCE := true
 
 PRODUCT_TYPE := mbox
 
-BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
+BOARD_AML_TDK_KEY_PATH := device/hardkernel/common/tdk_keys/
 WITH_LIBPLAYER_MODULE := false
 
 OTA_UP_PART_NUM_CHANGED := true
@@ -91,7 +91,7 @@ ifeq ($(BUILD_WITH_AVB),true)
 #BOARD_AVB_ENABLE := true
 BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_KEY_PATH := device/amlogic/common/security/testkey_rsa2048.pem
+BOARD_AVB_KEY_PATH := device/hardkernel/common/security/testkey_rsa2048.pem
 BOARD_AVB_ROLLBACK_INDEX := 0
 endif
 
@@ -196,7 +196,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/$(PRODUCT_DIR)/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
+    device/hardkernel/$(PRODUCT_DIR)/fstab.system.odroidn2:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.odroidn2
 
 #########################################################################
 #
@@ -207,7 +207,7 @@ PRODUCT_COPY_FILES += \
 #MULTI_WIFI_SUPPORT := true
 WIFI_MODULE := AP6398
 WIFI_BUILD_IN := true
-include device/amlogic/common/wifi.mk
+include device/hardkernel/common/wifi.mk
 
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
@@ -224,7 +224,7 @@ BOARD_HAVE_BLUETOOTH := true
 #MULTI_BLUETOOTH_SUPPORT := true
 BCMBT_SUPPORT := true
 BCM_BLUETOOTH_LPM_ENABLE := true
-include device/amlogic/common/bluetooth.mk
+include device/hardkernel/common/bluetooth.mk
 
 
 #########################################################################
@@ -254,7 +254,7 @@ PRODUCT_COPY_FILES += \
 # Audio
 #
 BOARD_ALSA_AUDIO=tiny
-include device/amlogic/common/audio.mk
+include device/hardkernel/common/audio.mk
 
 #########################################################################
 #
@@ -299,7 +299,7 @@ TARGET_ENABLE_TA_SIGN := true
 TARGET_USE_HW_KEYMASTER := true
 endif
 
-$(call inherit-product, device/amlogic/common/media.mk)
+$(call inherit-product, device/hardkernel/common/media.mk)
 
 #########################################################################
 #
@@ -348,7 +348,7 @@ BUILD_WITH_LOWMEM_COMMON_CONFIG := true
 BOARD_USES_USB_PM := true
 
 
-include device/amlogic/common/software.mk
+include device/hardkernel/common/software.mk
 ifeq ($(TARGET_BUILD_GOOGLE_ATV),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
@@ -371,7 +371,7 @@ endif
 
 ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_PACKAGES += \
-    bootctrl.amlogic \
+    bootctrl.$(TARGET_PRODUCT) \
     bootctl
 
 PRODUCT_PACKAGES += \
@@ -384,7 +384,7 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service
 endif
 
-include device/amlogic/common/gpu/gondul-user-arm64.mk
+include device/hardkernel/common/gpu/gondul-user-arm64.mk
 
 #########################################################################
 #

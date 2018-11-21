@@ -1,6 +1,6 @@
 #if use probuilt kernel or build kernel from source code
--include device/amlogic/common/media_modules.mk
--include device/amlogic/common/wifi_modules.mk
+-include device/hardkernel/common/media_modules.mk
+-include device/hardkernel/common/wifi_modules.mk
 KERNEL_ROOTDIR := common
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 USE_PREBUILT_KERNEL := false
@@ -13,9 +13,9 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
 
 ifneq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), true)
-TARGET_PREBUILT_KERNEL := device/amlogic/galilei-kernel/Image.gz
+TARGET_PREBUILT_KERNEL := device/hardkernel/galilei-kernel/Image.gz
 INSTALLED_BOARDDTB_TARGET := $(PRODUCT_OUT)/dt.img
-LOCAL_DTB := device/amlogic/galilei-kernel/galilei.dtb
+LOCAL_DTB := device/hardkernel/galilei-kernel/galilei.dtb
 
 $(TARGET_PREBUILT_KERNEL): $(INSTALLED_BOARDDTB_TARGET)
 	@echo "cp kernel modules"
@@ -25,16 +25,16 @@ $(TARGET_PREBUILT_KERNEL): $(INSTALLED_BOARDDTB_TARGET)
 	mkdir -p $(PRODUCT_OUT)/obj/KERNEL_OBJ/
 	mkdir -p $(PRODUCT_OUT)/recovery/root/boot
 	mkdir -p $(KERNEL_KO_OUT)
-	cp device/amlogic/galilei-kernel/lib/mali.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/amlogic/galilei-kernel/lib/modules/* $(KERNEL_KO_OUT)/
-	cp device/amlogic/galilei-kernel/lib/optee_armtz.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/amlogic/galilei-kernel/lib/optee.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/amlogic/galilei-kernel/lib/firmware/video/* $(PRODUCT_OUT)/vendor/lib/firmware/video/
-	-cp device/amlogic/galilei-kernel/obj/KERNEL_OBJ/vmlinux $(PRODUCT_OUT)/obj/KERNEL_OBJ/
+	cp device/hardkernel/galilei-kernel/lib/mali.ko $(PRODUCT_OUT)/vendor/lib/
+	cp device/hardkernel/galilei-kernel/lib/modules/* $(KERNEL_KO_OUT)/
+	cp device/hardkernel/galilei-kernel/lib/optee_armtz.ko $(PRODUCT_OUT)/vendor/lib/
+	cp device/hardkernel/galilei-kernel/lib/optee.ko $(PRODUCT_OUT)/vendor/lib/
+	cp device/hardkernel/galilei-kernel/lib/firmware/video/* $(PRODUCT_OUT)/vendor/lib/firmware/video/
+	-cp device/hardkernel/galilei-kernel/obj/KERNEL_OBJ/vmlinux $(PRODUCT_OUT)/obj/KERNEL_OBJ/
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	mkdir -p $(PRODUCT_OUT)/vendor/lib/egl
-	cp device/amlogic/galilei-kernel/lib/egl/* $(PRODUCT_OUT)/vendor/lib/egl/
+	cp device/hardkernel/galilei-kernel/lib/egl/* $(PRODUCT_OUT)/vendor/lib/egl/
 
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 	@echo "Kernel installed"
@@ -101,7 +101,7 @@ $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TAR
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules Image.gz
 #	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
-	$(MAKE) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/amlogic/common/wifi_driver.mk $(WIFI_MODULE)
+	$(MAKE) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/hardkernel/common/wifi_driver.mk $(WIFI_MODULE)
 	$(cp-modules)
 	$(media-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
@@ -134,7 +134,7 @@ $(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) | $(ACP)
 	@echo "Kernel installed"
 	$(transform-prebuilt-to-target)
 
--include device/amlogic/common/gpu/gondul-kernel.mk
+-include device/hardkernel/common/gpu/gondul-kernel.mk
 
 $(BOARD_VENDOR_KERNEL_MODULES): $(INSTALLED_KERNEL_TARGET)
 	@echo "BOARD_VENDOR_KERNEL_MODULES: $(BOARD_VENDOR_KERNEL_MODULES)"

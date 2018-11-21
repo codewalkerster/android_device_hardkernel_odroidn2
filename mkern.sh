@@ -3,7 +3,7 @@
 # Run from top of kitkat source
 
 #ROOTFS=$1
-ROOTFS="out/target/product/galilei/ramdisk.img"
+ROOTFS="out/target/product/odroidn2/ramdisk.img"
 PREFIX_CROSS_COMPILE=aarch64-linux-gnu-
 
 if [ "$ROOTFS" == "" -o ! -f "$ROOTFS" ]; then
@@ -11,7 +11,7 @@ if [ "$ROOTFS" == "" -o ! -f "$ROOTFS" ]; then
     exit 1
 fi
 
-KERNEL_OUT=out/target/product/galilei/obj/KERNEL_OBJ
+KERNEL_OUT=out/target/product/odroidn2/obj/KERNEL_OBJ
 #mkdir -p $KERNEL_OUT
 
 if [ ! -f $KERNEL_OUT/.config ]; then
@@ -32,7 +32,7 @@ if [ "$2" != "m" ]; then
         --base 0x0 \
         --kernel_offset 0x1080000 \
         --ramdisk ${ROOTFS} \
-        --output ./out/target/product/galilei/boot.img
-    ls -l ./out/target/product/galilei/boot.img
+        --output ./out/target/product/odroidn2/boot.img
+    ls -l ./out/target/product/odroidn2/boot.img
     echo "boot.img done"
 fi

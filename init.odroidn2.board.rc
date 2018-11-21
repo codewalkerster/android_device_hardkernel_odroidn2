@@ -1,4 +1,4 @@
-import /vendor/etc/init/hw/init.amlogic.usb.rc
+import /vendor/etc/init/hw/init.odroidn2.usb.rc
 
 on early-init
     loglevel 3

@@ -1,4 +1,4 @@
-# Copyright (C) 2010 Amlogic Inc
+# Copyright (C) 2010 HardKernel Co., Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,6 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(LOCAL_PATH)/Kernel.mk
-include device/amlogic/common/factory.mk
+include device/hardkernel/common/factory.mk
 
 $(call add-radio-file,bootloader.img)
