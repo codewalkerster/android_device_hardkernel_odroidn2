@@ -18,5 +18,3 @@ include $(LOCAL_PATH)/Kernel.mk
 include device/hardkernel/common/factory.mk
 include $(LOCAL_PATH)/selfinstall.mk
 include device/hardkernel/common/bootloader.mk
-
-$(call add-radio-file,bootloader.img)

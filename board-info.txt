@@ -1,2 +1,0 @@
-require board=g12b_w400
-require version-bootloader=U-Boot 2015.01-ga03f09f
