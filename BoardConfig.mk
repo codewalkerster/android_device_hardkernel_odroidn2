@@ -50,7 +50,7 @@ TARGET_BOARD_PLATFORM := odroidn2
 TARGET_BOOTLOADER_BOARD_NAME := odroidn2
 
 # Allow passing `--second` to mkbootimg via 2ndbootloader.
-TARGET_BOOTLOADER_IS_2ND := true
+TARGET_BOOTLOADER_IS_2ND := false
 
 # Graphics & Display
 USE_OPENGL_RENDERER := true

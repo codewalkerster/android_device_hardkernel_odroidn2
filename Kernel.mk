@@ -9,51 +9,9 @@ INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 
-INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
-
-ifneq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), true)
-TARGET_PREBUILT_KERNEL := device/hardkernel/galilei-kernel/Image.gz
-INSTALLED_BOARDDTB_TARGET := $(PRODUCT_OUT)/dt.img
-LOCAL_DTB := device/hardkernel/galilei-kernel/galilei.dtb
-
-$(TARGET_PREBUILT_KERNEL): $(INSTALLED_BOARDDTB_TARGET)
-	@echo "cp kernel modules"
-	mkdir -p $(PRODUCT_OUT)/root/boot
-	mkdir -p $(PRODUCT_OUT)/vendor/lib/firmware/video
-	mkdir -p $(PRODUCT_OUT)/obj/lib
-	mkdir -p $(PRODUCT_OUT)/obj/KERNEL_OBJ/
-	mkdir -p $(PRODUCT_OUT)/recovery/root/boot
-	mkdir -p $(KERNEL_KO_OUT)
-	cp device/hardkernel/galilei-kernel/lib/mali.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/hardkernel/galilei-kernel/lib/modules/* $(KERNEL_KO_OUT)/
-	cp device/hardkernel/galilei-kernel/lib/optee_armtz.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/hardkernel/galilei-kernel/lib/optee.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/hardkernel/galilei-kernel/lib/firmware/video/* $(PRODUCT_OUT)/vendor/lib/firmware/video/
-	-cp device/hardkernel/galilei-kernel/obj/KERNEL_OBJ/vmlinux $(PRODUCT_OUT)/obj/KERNEL_OBJ/
-	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
-	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
-	mkdir -p $(PRODUCT_OUT)/vendor/lib/egl
-	cp device/hardkernel/galilei-kernel/lib/egl/* $(PRODUCT_OUT)/vendor/lib/egl/
-
-$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-	@echo "Kernel installed"
-	$(transform-prebuilt-to-target)
-
-$(INSTALLED_BOARDDTB_TARGET): $(LOCAL_DTB) | $(ACP)
-	@echo "dtb installed"
-	$(transform-prebuilt-to-target)
-
-$(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) | $(ACP)
-	@echo "2ndbootloader installed"
-	$(transform-prebuilt-to-target)
-
-else
-
 KERNEL_DEVICETREE := s922d_odroidn2_android
 KERNEL_DEFCONFIG := odroidn2_android_defconfig
 KERNEL_ARCH := arm64
-
-
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
@@ -90,8 +48,6 @@ $(KERNEL_CONFIG): $(KERNEL_OUT)
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 
-INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
-
 $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG)
 	@echo "make Image"
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE)
@@ -120,10 +76,6 @@ savekernelconfig: $(KERNEL_OUT) $(KERNEL_CONFIG)
 
 build-modules-quick:
 	    $(media-modules)
-
-$(INSTALLED_2NDBOOTLOADER_TARGET): $(PRODUCT_OUT)/dt.img | $(ACP)
-	@echo "2ndbootloader installed"
-	$(transform-prebuilt-to-target)
 
 $(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) | $(ACP)
 	@echo "Kernel installed"
@@ -166,8 +118,6 @@ recoveryimage-quick: $(INTERMEDIATES_KERNEL)
 .PHONY: kernelconfig
 
 .PHONY: savekernelconfig
-
-endif
 
 $(PRODUCT_OUT)/ramdisk.img: $(INSTALLED_KERNEL_TARGET)
 $(PRODUCT_OUT)/system.img: $(INSTALLED_KERNEL_TARGET)
