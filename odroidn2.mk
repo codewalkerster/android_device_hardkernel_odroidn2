@@ -103,7 +103,6 @@ AB_OTA_PARTITIONS := \
     odm
 
 TARGET_BOOTLOADER_CONTROL_BLOCK := true
-TARGET_NO_RECOVERY := true
 ifneq ($(BUILD_WITH_AVB),true)
 TARGET_PARTITION_DTSI := partition_mbox_ab.dtsi
 else
