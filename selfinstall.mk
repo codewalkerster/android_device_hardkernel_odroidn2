@@ -67,8 +67,8 @@ $(SELFINSTALL_DIR)/cache: $(SELFINSTALL_SIGNED_UPDATEPACKAGE) $(BOOTLOADER_MESSA
 	cp -af $(PRODUCT_OUT)/cache/ $(SELFINSTALL_DIR)/
 
 $(SELFINSTALL_DIR)/cache.img: $(SELFINSTALL_DIR)/cache
-	$(MAKE_EXT4FS) -s -L cache -a cache \
-		-l $(BOARD_CACHEIMAGE_PARTITION_SIZE) $@ $<
+	mkuserimg_mke2fs.sh -s $< $@ ext4 cache \
+		$(BOARD_CACHEIMAGE_PARTITION_SIZE) -L cache
 
 $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 	simg2img $(SELFINSTALL_DIR)/cache.img $@
