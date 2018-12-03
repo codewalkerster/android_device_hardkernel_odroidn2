@@ -27,7 +27,7 @@ BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
-PREFIX_CROSS_COMPILE=/opt/toolcahins/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+PREFIX_CROSS_COMPILE=/opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 
