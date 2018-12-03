@@ -33,12 +33,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.camera.preview.LimitedRate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
     ro.camera.preview.UseMJPEG=1
 
-#for bt auto connect
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.autoconnectbt.isneed=false \
-    ro.autoconnectbt.macprefix=00:CD:FF \
-    ro.autoconnectbt.btclass=50c \
-    ro.autoconnectbt.nameprefix=Amlogic_RC
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.radio.noril=false
