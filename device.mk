@@ -15,7 +15,7 @@
 #
 
 PRODUCT_COPY_FILES += \
-    device/hardkernel/common/products/mbox/init.odroidn2.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.odroidn2.rc \
+    device/hardkernel/$(PRODUCT_DIR)/init.$(TARGET_PRODUCT).system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(TARGET_PRODUCT).rc \
     device/hardkernel/$(PRODUCT_DIR)/init.$(TARGET_PRODUCT).usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.odroid.usb.rc \
     device/hardkernel/$(PRODUCT_DIR)/init.$(TARGET_PRODUCT).board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.odroid.board.rc
 
