@@ -18,7 +18,6 @@
 #define _BDROID_BUILDCFG_H
 
 #define BLUETOOTH_HCI_USE_USB TRUE
-#define HCILP_INCLUDE FALSE
 #define BTA_AV_SINK_INCLUDED TRUE
 
 /* Odroid custom option */
