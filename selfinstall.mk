@@ -59,6 +59,7 @@ $(BOOTLOADER_MESSAGE):
 	mkdir -p $(dir $@)
 	dd if=/dev/zero of=$@ bs=16 count=4	# 64 Bytes
 	echo "recovery" >> $@
+	echo "--just_exit" >> $@
 	echo "--locale=en_US" >> $@
 	echo "--update_package=/cache/update.zip" >> $@
 
