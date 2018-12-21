@@ -138,5 +138,4 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 #enable/disable afbc
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    osd.afbcd.enable=1 \
-    sys.sf.debug.nohwc=true
+    osd.afbcd.enable=1
