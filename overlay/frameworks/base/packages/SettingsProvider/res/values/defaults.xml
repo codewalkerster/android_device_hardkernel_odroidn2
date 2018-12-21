@@ -24,4 +24,5 @@
     <bool name="def_lockscreen_disabled">true</bool>
     <!-- Default for Settings.Secure.USER_SETUP_COMPLETE -->
     <bool name="def_user_setup_complete">true</bool>
+    <bool name="def_install_non_market_apps">true</bool>
 </resources>
