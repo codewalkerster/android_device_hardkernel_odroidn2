@@ -126,3 +126,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.hdmi.device_type=4
