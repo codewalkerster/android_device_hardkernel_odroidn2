@@ -88,7 +88,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=2056
 	dd if=$(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/arm64/boot/dts/amlogic/$(DTBS) of=$@ conv=fsync bs=512 seek=6160
 	dd if=$(BOOT_IMG) of=$@ conv=fsync bs=512 seek=6416
-	dd if=$(INSTALLED_RECOVERYIMAGE_TARGET) of=$@ conv=fsync bs=512 seek=55568
+	dd if=$(INSTALLED_RECOVERYIMAGE_TARGET) of=$@ conv=fsync bs=512 seek=39184
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88336
 	sync
 	@echo "Done."
