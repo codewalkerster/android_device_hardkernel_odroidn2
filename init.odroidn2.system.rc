@@ -34,7 +34,7 @@ on init
     chmod 666 /sys/class/vdec/poweron_clock_level
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chown system system /sys/class/graphics/fb0/osd_afbcd
-    write /proc/sys/vm/watermark_scale_factor 150
+    write /proc/sys/vm/watermark_scale_factor 30
     write /proc/sys/vm/min_free_kbytes 12288
     chmod 666 /sys/class/video/blackout_policy
     chmod 666 /sys/class/tsync/vpause_flag
@@ -92,12 +92,10 @@ on boot
     # change back to bluetooth from system
     chown bluetooth bluetooth /data/misc/bluetooth
 
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
-
     chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_ch
     chmod 0664 /sys/class/amhdmitx/amhdmitx0/aud_ch
     insmod  /vendor/lib/modules/aml_thermal.ko
+    #insmod  /vendor/lib/modules/ddr_window_64.ko
 
     chown media system /sys/class/tsync/pts_video
     chown mediadrm audio /sys/class/tsync/pts_audio
@@ -246,6 +244,11 @@ on boot
 
     chown media system /sys/module/amvdec_h265/parameters/double_write_mode
     chmod 666 /sys/module/amvdec_h265/parameters/double_write_mode
+
+    chown media system /sys/module/amdolby_vision/parameters/dolby_vision_profile
+    chown media system /sys/module/amdolby_vision/parameters/dolby_vision_level
+    chmod 666 /sys/module/amdolby_vision/parameters/dolby_vision_profile
+    chmod 666 /sys/module/amdolby_vision/parameters/dolby_vision_level
 
     chown media system /sys/module/deinterlace/parameters/deinterlace_mode
     chown media system /sys/class/graphics/fb0/block_mode

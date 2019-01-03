@@ -37,7 +37,7 @@ $(call inherit-product, device/hardkernel/common/products/mbox/product_mbox.mk)
 $(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
-TARGET_WITH_MEDIA_EXT_LEVEL := 3
+TARGET_WITH_MEDIA_EXT_LEVEL := 4
 
 #########################################################################
 #
@@ -57,6 +57,13 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
     TARGET_WITH_SWCODEC_EXT := true
     TARGET_WITH_CODEC_EXT := true
     TARGET_WITH_PLAYERS_EXT :=true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 4)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_CODEC_EXT := true
+    TARGET_WITH_PLAYERS_EXT := true
+endif
 endif
 endif
 endif
@@ -85,7 +92,7 @@ BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
 
 #AB_OTA_UPDATER :=true
-BUILD_WITH_AVB := true
+BUILD_WITH_AVB := false
 
 ifeq ($(BUILD_WITH_AVB),true)
 #BOARD_AVB_ENABLE := true
@@ -100,7 +107,8 @@ AB_OTA_PARTITIONS := \
     boot \
     system \
     vendor \
-    odm
+    odm \
+    product
 
 TARGET_BOOTLOADER_CONTROL_BLOCK := true
 ifneq ($(BUILD_WITH_AVB),true)
@@ -112,6 +120,8 @@ else
 TARGET_NO_RECOVERY := false
 
 #BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
+BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 TARGET_PARTITION_DTSI := partition_mbox_normal_P_64.dtsi
@@ -389,9 +399,11 @@ PRODUCT_PACKAGES += updater
 ifneq ($(TARGET_BUILD_LIVETV),true)
 TARGET_BUILD_LIVETV := false
 endif
+
 ifneq ($(TARGET_BUILD_GOOGLE_ATV),true)
 TARGET_BUILD_GOOGLE_ATV := false
 endif
+
 ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
 endif
