@@ -112,4 +112,4 @@ DEVICE_FRAMEWORK_MANIFEST_FILE += \
 PRODUCT_PACKAGES += android.hardware.health@2.0-service
 
 PRODUCT_COPY_FILES += \
-    device/hardkernel/odroidn2/files/odroid-usbgps.xml:vendor/odroid-usbgps.xml
+    device/hardkernel/odroidn2/files/odroid-usbgps.xml:root/odroid-usbgps.xml
