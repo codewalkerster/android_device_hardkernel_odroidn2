@@ -395,3 +395,5 @@ endif
 ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
 endif
+
+$(call inherit-product, device/hardkernel/proprietary/proprietary.mk)
