@@ -1,0 +1,138 @@
+ODROIDN2-UBOOT-CONFIG
+
+setenv dtbaddr 0x1000000
+setenv loadaddr 0x20000000
+
+# Resolution Configuration
+# 'hdmimode' must be one of below to configure display resolution within
+# supported by your TV or monitor.
+#    Symbol             | Resolution
+# ----------------------+-------------
+#    "480x320p60hz"     | 480x320 Progressive 60Hz
+#    "480p60hz"         | 720x480 Progressive 60Hz
+#    "576p50hz"         | 720x576 Progressive 50Hz
+#    "720p60hz"         | 1280x720 Progressive 60Hz
+#    "720p50hz"         | 1280x720 Progressive 50Hz
+#    "1080p60hz"        | 1920x1080 Progressive 60Hz
+#    "1080p50hz"        | 1920x1080 Progressive 50Hz
+#    "1080p30hz"        | 1920x1080 Progressive 30Hz
+#    "1080p24hz"        | 1920x1080 Progressive 24Hz
+#    "1080i60hz"        | 1920x1080 Interlaced 60Hz
+#    "1080i50hz"        | 1920x1080 Interlaced 50Hz
+#    "2160p60hz"        | 3840x2160 Progressive 60Hz
+#    "2160p50hz"        | 3840x2160 Progressive 50Hz
+#    "2160p30hz"        | 3840x2160 Progressive 30Hz
+#    "2160p25hz"        | 3840x2160 Progressive 25Hz
+#    "2160p24hz"        | 3840x2160 Progressive 24Hz
+#    "2160p60hz420"     | 3840x2160 Progressive 60Hz YCbCr 4:2:0
+#    "2160p50hz420"     | 3840x2160 Progressive 50Hz YCbCr 4:2:0
+#    "640x480p60hz"     | 640x480 Progressive 60Hz
+#    "800x480p60hz"     | 800x480 Progressive 60Hz
+#    "800x600p60hz"     | 800x600 Progressive 60Hz
+#    "1024x600p60hz"    | 1024x600 Progressive 60Hz
+#    "1024x768p60hz"    | 1024x768 Progressive 60Hz
+#    "1280x800p60hz"    | 1280x800 Progressive 60Hz
+#    "1280x1024p60hz"   | 1280x1024 Progressive 60Hz
+#    "1360x768p60hz"    | 1360x768 Progressive 60Hz
+#    "1440x900p60hz"    | 1440x900 Progressive 60Hz
+#    "1600x900p60hz"    | 1600x900 Progressive 60Hz
+#    "1600x1200p60hz"   | 1600x1200 Progressive 60Hz
+#    "1680x1050p60hz"   | 1680x1050 Progressive 60Hz
+#    "1920x1200p60hz"   | 1920x1200 Progressive 60Hz
+#    "2560x1080p60hz"   | 2560x1080 Progressive 60Hz
+#    "2560x1440p60hz"   | 2560x1440 Progressive 60Hz
+#    "2560x1600p60hz"   | 2560x1600 Progressive 60Hz
+#    "3440x1440p60hz"   | 3440x1440 Progressive 60Hz
+setenv hdmimode "1080p60hz"
+
+setenv rootopt "rootfstype=ramfs init=/init rootwait"
+setenv consoleopt "console=ttyS0,115200"
+setenv androidopt "androidboot.hardware=odroidn2 androidboot.serialno=${fbt_id#}"
+setenv logoopt "logo=osd0,loaded,0x3d800000"
+setenv selinuxopt "androidboot.selinux=permissive"
+
+# HDMI/DVI Mode Configuration
+# This will enforce the signal type of display
+# "hdmi" - For HDMI interface
+# "dvi" - For DVI interface
+setenv vout_mode "hdmi"
+
+# Display Auto Detection
+# "false" or "true"
+setenv display_autodetect "true"
+
+# HPD enable/disable option
+setenv disablehpd "false"
+
+# Overscan offset configuration
+# All offsets are zero and can be tuned by manual or ODROID Utility
+setenv overscan_top "0"
+setenv overscan_left "0"
+setenv overscan_bottom "0"
+setenv overscan_right "0"
+setenv led_onoff "on"
+suspend_hdmiphy=0
+
+# Force HDMI to use RGB colorspace regardless of TV request
+setenv hdmi_forcergb "0"      # Disabled
+# setenv hdmi_forcergb "1"        # Enabled
+
+# max cpu frequency in dvfs table / in MHz unit
+# setenv max_freq "2016"  # 2.016GHz
+# setenv max_freq "1944"  # 1.944GHz
+# setenv max_freq "1920"  # 1.920GHz
+# setenv max_freq "1896"  # 1.896GHz
+# setenv max_freq "1752"  # 1.752GHz
+# setenv max_freq "1680"  # 1.680GHz
+# setenv max_freq "1656"  # 1.656GHz
+# setenv max_freq "1536"  # 1.536GHz
+setenv max_freq "1536"
+
+# max cpu-cores
+# setenv maxcpus "1"
+# setenv maxcpus "2"
+# setenv maxcpus "3"
+setenv maxcpus "4"
+
+# disable vu7
+setenv disable_vu7 "false"
+
+# invert touch screen x,y
+setenv touch_invert_x "false"
+setenv touch_invert_y "false"
+
+# gpio power key : J2 (2x20) Pin#35, GPIOY.BIT3
+#setenv gpiopower "214"
+
+# usb timing tweak
+setenv usbmulticam "false"
+
+setenv hdmitx "hdmitx=${cecconfig}"
+if test "${hdmi_forcergb}" = "1"; then setenv hdmitx "hdmitx=forcergb"; fi
+
+if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
+if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline}"; fi
+
+# Enable backlight_pwm
+# disable : backlight "no"
+# ODROID-VU5/7 : backlight "yes"
+# ODROID-VU8 : backlight "invert"
+setenv backlight_pwm "no"
+
+setenv test_mt_vid "0000"
+setenv test_mt_pid "0000"
+
+showddrclk
+
+setenv bootargs "${rootopt} ${consoleopt} hdmimode=${hdmimode} ${cmode} ${hdmitx} vout=${vout_mode} disablehpd=${disablehpd} logo=${logoopt} ${androidopt} ${selinuxopt} suspend_hdmiphy=${suspend_hdmiphy} led_onoff=${led_onoff} max_freq=${max_freq} maxcpus=${maxcpus} disable_vu7=${disable_vu7} touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y} usbmulticam=${usbmulticam} gpiopower=${gpiopower} backlight_pwm=${backlight_pwm} ddrclock=${ddrclock} test_mt_pid=${test_mt_pid} test_mt_vid=${test_mt_vid}"
+
+save
+
+showlogo ${hdmimode}
+#usb pwren
+
+movi read dtb 0 ${dtbaddr}
+# load kernel from vat or boot partition.
+movi read boot 0 ${loadaddr}
+#fatload mmc 0:1 ${loadaddr} Image_android
+booti ${loadaddr} - ${dtbaddr}

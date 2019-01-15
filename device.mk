@@ -112,4 +112,6 @@ DEVICE_FRAMEWORK_MANIFEST_FILE += \
 PRODUCT_PACKAGES += android.hardware.health@2.0-service
 
 PRODUCT_COPY_FILES += \
-    device/hardkernel/odroidn2/files/odroid-usbgps.xml:root/odroid-usbgps.xml
+    device/hardkernel/odroidn2/files/odroid-usbgps.xml:root/odroid-usbgps.xml \
+    device/hardkernel/odroidn2/files/boot.ini.template:vendor/etc/boot.ini.template \
+    device/hardkernel/odroidn2/files/makebootini:vendor/bin/makebootini

@@ -35,12 +35,12 @@ run_program("/sbin/mkfs.vfat", "-n", "VFAT", "/dev/block/odm");
 
 set_progress(0.9000);
 
-#ui_print("   boot.ini is copying to FAT partition");
-#mount("vfat", "EMMC", "/dev/block/odm", "/sdcard");
-#mount("ext4", "EMMC", "/dev/block/system", "/system");
-#run_program("/bin/cp", "/system/etc/boot.ini.template", "/sdcard/boot.ini");
-#unmount("/system");
-#unmount("/sdcard");
+ui_print("   boot.ini is copying to FAT partition");
+mount("vfat", "EMMC", "/dev/block/odm", "/sdcard");
+mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
+run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/sdcard/boot.ini");
+unmount("/vendor");
+unmount("/sdcard");
 
 ui_print("Self installation is completed.\nHave fun with ODROID-N2!\n\n");
 set_progress(1.0000);

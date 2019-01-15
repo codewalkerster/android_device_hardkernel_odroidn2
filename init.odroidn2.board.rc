@@ -36,3 +36,15 @@ on boot
 #NET LED
     chmod 666 sys/class/leds/net_green/brightness
     chmod 666 sys/class/leds/net_red/brightness
+
+on fs
+
+service makebootini /vendor/bin/makebootini
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:dev.bootcomplete=1
+    start makebootini

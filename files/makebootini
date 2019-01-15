@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ -e "/odm/boot.ini" ]
+then
+    break
+else
+    cp /vendor/etc/boot.ini.template /odm/boot.ini
+fi
