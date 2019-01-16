@@ -23,7 +23,6 @@ $(PRODUCT_OUT)/updatepackage.zip: \
 	cp -ad $(PRODUCT_OUT)/product $(PKGDIR)
 	find $(PKGDIR)/product -type l | xargs rm -rf
 	cp -a $(INSTALLED_RECOVERYIMAGE_TARGET) $(PKGDIR)
-	cp -a $(PRODUCT_OUT)/vendor/etc/boot.ini.template $(PKGDIR)/vendor/etc/
 	cp -a $(PRODUCT_OUT)/system/bin/updater \
 		$(PKGDIR)/META-INF/com/google/android/update-binary
 	cp -a $(TARGET_DEVICE_DIR)/recovery/updater-script.updatepackage \

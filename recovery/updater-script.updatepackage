@@ -47,9 +47,6 @@ package_extract_dir("product", "/product");
 
 set_progress(0.8000);
 
-ui_print("   boot.ini.template is copying to /vendor/etc/");
-package_extract_file("vendor/etc/boot.ini.template", "/vendor/etc/boot.ini.template");
-
 set_progress(0.9000);
 
 ui_print("Android update is completed.\nHave fun with ODROID-N2!\n\n");
