@@ -1,5 +1,7 @@
 ODROIDN2-UBOOT-CONFIG
 
+setenv label "android_9.0.0_Beta1"
+
 setenv dtbaddr 0x1000000
 setenv loadaddr 0x20000000
 
