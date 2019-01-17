@@ -64,12 +64,6 @@ setenv display_autodetect "true"
 # HPD enable/disable option
 setenv disablehpd "false"
 
-# Overscan offset configuration
-# All offsets are zero and can be tuned by manual or ODROID Utility
-setenv overscan_top "0"
-setenv overscan_left "0"
-setenv overscan_bottom "0"
-setenv overscan_right "0"
 setenv led_onoff "on"
 suspend_hdmiphy=0
 
@@ -77,22 +71,15 @@ suspend_hdmiphy=0
 setenv hdmi_forcergb "0"      # Disabled
 # setenv hdmi_forcergb "1"        # Enabled
 
-# max cpu frequency in dvfs table / in MHz unit
-# setenv max_freq "2016"  # 2.016GHz
-# setenv max_freq "1944"  # 1.944GHz
-# setenv max_freq "1920"  # 1.920GHz
-# setenv max_freq "1896"  # 1.896GHz
-# setenv max_freq "1752"  # 1.752GHz
-# setenv max_freq "1680"  # 1.680GHz
-# setenv max_freq "1656"  # 1.656GHz
-# setenv max_freq "1536"  # 1.536GHz
-setenv max_freq "1536"
+# CPU
+setenv max_freq_a73 "1704000"
+setenv governor_a73 "performance"
 
-# max cpu-cores
-# setenv maxcpus "1"
-# setenv maxcpus "2"
-# setenv maxcpus "3"
-setenv maxcpus "4"
+setenv max_freq_a53 "1896000"
+setenv governor_a53 "performance"
+
+# Display Zoom Rate
+setenv zoom_rate "100"
 
 # disable vu7
 setenv disable_vu7 "false"
