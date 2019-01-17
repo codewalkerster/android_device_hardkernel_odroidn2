@@ -2,6 +2,8 @@ SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
 PKGDIR=$(PRODUCT_OUT)/updatepackage
 
+FIRST_UPDATE_DIR := first_update
+
 UBOOT := bootloader/uboot/sd_fuse
 KERNEL :=$(PRODUCT_OUT)/obj/KERNEL_OBJ
 DTB := $(KERNEL)/arch/arm64/boot/dts/amlogic/s922d_odroidn2_android.dtb
@@ -18,10 +20,13 @@ $(PRODUCT_OUT)/updatepackage.zip: \
 	cp -a $(DTB) $(PKGDIR)
 	cp -ad $(PRODUCT_OUT)/vendor $(PKGDIR)
 	find $(PKGDIR)/vendor -type l | xargs rm -rf
+	diff -srq $(PKGDIR)/vendor $(FIRST_UPDATE_DIR)/vendor | grep identical | awk -F ' ' '{print $$2}' | xargs rm -rf
 	cp -ad $(PRODUCT_OUT)/system $(PKGDIR)
 	find $(PKGDIR)/system -type l | xargs rm -rf
+	diff -srq $(PKGDIR)/system $(FIRST_UPDATE_DIR)/system | grep identical | awk -F ' ' '{print $$2}' | xargs rm -rf
 	cp -ad $(PRODUCT_OUT)/product $(PKGDIR)
 	find $(PKGDIR)/product -type l | xargs rm -rf
+	diff -srq $(PKGDIR)/product $(FIRST_UPDATE_DIR)/system | grep identical | awk -F ' ' '{print $$2}' | xargs rm -rf
 	cp -a $(INSTALLED_RECOVERYIMAGE_TARGET) $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/system/bin/updater \
 		$(PKGDIR)/META-INF/com/google/android/update-binary
