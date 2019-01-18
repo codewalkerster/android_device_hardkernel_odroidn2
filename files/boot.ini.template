@@ -74,10 +74,10 @@ setenv hdmi_forcergb "0"      # Disabled
 # setenv hdmi_forcergb "1"        # Enabled
 
 # CPU
-setenv max_freq_a73 "1704000"
+setenv max_freq_a73 "1704"
 setenv governor_a73 "performance"
 
-setenv max_freq_a53 "1896000"
+setenv max_freq_a53 "1896"
 setenv governor_a53 "performance"
 
 # Display Zoom Rate
