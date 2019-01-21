@@ -6,8 +6,9 @@ setenv dtbaddr 0x1000000
 setenv loadaddr 0x20000000
 
 # Resolution Configuration
-# 'hdmimode' must be one of below to configure display resolution within
+# 'hdmimode' & 'outputmode' must be one of below to configure display resolution within
 # supported by your TV or monitor.
+# And both of values MUST be same.
 #    Symbol             | Resolution
 # ----------------------+-------------
 #    "480x320p60hz"     | 480x320 Progressive 60Hz
@@ -46,6 +47,7 @@ setenv loadaddr 0x20000000
 #    "2560x1600p60hz"   | 2560x1600 Progressive 60Hz
 #    "3440x1440p60hz"   | 3440x1440 Progressive 60Hz
 setenv hdmimode "1080p60hz"
+setenv outputmode "1080p60hz"
 
 setenv rootopt "rootfstype=ramfs init=/init rootwait"
 setenv consoleopt "console=ttyS0,115200"
