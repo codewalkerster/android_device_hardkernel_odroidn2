@@ -2,8 +2,11 @@ ODROIDN2-UBOOT-CONFIG
 
 setenv label "android_9.0.0_Beta1"
 
-setenv dtbaddr 0x1000000
-setenv loadaddr 0x20000000
+############################################################
+#
+# Display & Touch
+#
+############################################################
 
 # Resolution Configuration
 # 'hdmimode' & 'outputmode' must be one of below to configure display resolution within
@@ -49,41 +52,7 @@ setenv loadaddr 0x20000000
 setenv hdmimode "1080p60hz"
 setenv outputmode "1080p60hz"
 
-setenv rootopt "rootfstype=ramfs init=/init rootwait"
-setenv consoleopt "console=ttyS0,115200"
-setenv androidopt "androidboot.hardware=odroidn2 androidboot.serialno=${fbt_id#}"
-setenv logoopt "logo=osd0,loaded,0x3d800000"
-setenv selinuxopt "androidboot.selinux=permissive"
-
-# HDMI/DVI Mode Configuration
-# This will enforce the signal type of display
-# "hdmi" - For HDMI interface
-# "dvi" - For DVI interface
-setenv vout_mode "hdmi"
-
-# Display Auto Detection
-# "false" or "true"
-setenv display_autodetect "true"
-
-# HPD enable/disable option
-setenv disablehpd "false"
-
-setenv led_onoff "on"
-suspend_hdmiphy=0
-
-# Force HDMI to use RGB colorspace regardless of TV request
-setenv hdmi_forcergb "0"      # Disabled
-# setenv hdmi_forcergb "1"        # Enabled
-
-# CPU
-setenv max_freq_a73 "1704"
-setenv governor_a73 "performance"
-
-setenv max_freq_a53 "1896"
-setenv governor_a53 "performance"
-
-# Display Zoom Rate
-setenv zoom_rate "100"
+setenv cvbsmode "576cvbs"
 
 # disable vu7
 setenv disable_vu7 "false"
@@ -92,38 +61,91 @@ setenv disable_vu7 "false"
 setenv touch_invert_x "false"
 setenv touch_invert_y "false"
 
+# Display Zoom Rate
+setenv zoom_rate "100"
+
+setenv osd_reverse "0"
+setenv video_reverse "0"
+
+############################################################
+#
+# CPU
+#
+############################################################
+
+setenv max_freq_a73 "1704"
+setenv governor_a73 "performance"
+
+setenv max_freq_a53 "1896"
+setenv governor_a53 "performance"
+
+setenv test_mt_vid "0000"
+setenv test_mt_pid "0000"
+
+############################################################
+#
+# Boot args
+#
+############################################################
+
+# Init args
+setenv rootopt "rootfstype=ramfs init=/init"
+setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000"
+setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
+
+setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53}"
+
+# dtbs & boot addr
+setenv dtb_mem_addr 0x1000000
+setenv loadaddr 0x1080000
+
+# Selinux
+setenv EnableSelinux "permissive"
+
+# logo
+setenv display_layer "osd0"
+setenv fb_addr "0x3d800000"
+
+############################################################
+#
+# NOT IMPLEMENTED.
+#
+############################################################
 # gpio power key : J2 (2x20) Pin#35, GPIOY.BIT3
 #setenv gpiopower "214"
 
-# usb timing tweak
-setenv usbmulticam "false"
+#setenv hdmitx "hdmitx=${cecconfig}"
+#if test "${hdmi_forcergb}" = "1"; then setenv hdmitx "hdmitx=forcergb"; fi
+#
+#if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
+#if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline}"; fi
 
-setenv hdmitx "hdmitx=${cecconfig}"
-if test "${hdmi_forcergb}" = "1"; then setenv hdmitx "hdmitx=forcergb"; fi
-
-if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
-if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline}"; fi
+# HDMI/DVI Mode Configuration
+# This will enforce the signal type of display
+# "hdmi" - For HDMI interface
+# "dvi" - For DVI interface
+# setenv vout_mode "hdmi"
 
 # Enable backlight_pwm
 # disable : backlight "no"
 # ODROID-VU5/7 : backlight "yes"
 # ODROID-VU8 : backlight "invert"
-setenv backlight_pwm "no"
+#setenv backlight_pwm "no"
 
-setenv test_mt_vid "0000"
-setenv test_mt_pid "0000"
+# Display Auto Detection
+# "false" or "true"
+#setenv display_autodetect "true"
 
-showddrclk
+#showddrclk
 
-setenv bootargs "${rootopt} ${consoleopt} hdmimode=${hdmimode} ${cmode} ${hdmitx} vout=${vout_mode} disablehpd=${disablehpd} logo=${logoopt} ${androidopt} ${selinuxopt} suspend_hdmiphy=${suspend_hdmiphy} led_onoff=${led_onoff} max_freq=${max_freq} maxcpus=${maxcpus} disable_vu7=${disable_vu7} touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y} usbmulticam=${usbmulticam} gpiopower=${gpiopower} backlight_pwm=${backlight_pwm} ddrclock=${ddrclock} test_mt_pid=${test_mt_pid} test_mt_vid=${test_mt_vid}"
+#showlogo ${hdmimode}
 
-save
+# HPD enable/disable option
+#setenv disablehpd "false"
 
-showlogo ${hdmimode}
-#usb pwren
+# suspend_hdmiphy=0
+# setenv led_onoff "on"
 
-movi read dtb 0 ${dtbaddr}
-# load kernel from vat or boot partition.
-movi read boot 0 ${loadaddr}
-#fatload mmc 0:1 ${loadaddr} Image_android
-booti ${loadaddr} - ${dtbaddr}
+# Force HDMI to use RGB colorspace regardless of TV request
+# setenv hdmi_forcergb "0"      # Disabled
+# setenv hdmi_forcergb "1"        # Enabled
