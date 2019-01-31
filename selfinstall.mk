@@ -17,7 +17,7 @@
 SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
 BOOT_IMG := $(PRODUCT_OUT)/boot.img
-DTBS := s922d_odroidn2_android.dtb
+DTBS := meson64_odroidn2_android.dtb
 
 VENDOR := vendor.img
 

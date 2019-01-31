@@ -18,8 +18,8 @@ run_program("/sbin/dd", "if=/tmp/boot.img", "of=/dev/block/boot");
 set_progress(0.3000);
 
 ui_print("   dtb image is flashing...");
-package_extract_file("s922d_odroidn2_android.dtb", "/tmp/s922d_odroidn2_android.dtb");
-run_program("/sbin/dd", "if=/tmp/s922d_odroidn2_android.dtb", "of=/dev/block/dtbs");
+package_extract_file("meson64_odroidn2_android.dtb", "/tmp/meson64_odroidn2_android.dtb");
+run_program("/sbin/dd", "if=/tmp/meson64_odroidn2_android.dtb", "of=/dev/block/dtbs");
 
 set_progress(0.4000);
 

@@ -6,7 +6,7 @@ FIRST_UPDATE_DIR := first_update
 
 UBOOT := bootloader/uboot/sd_fuse
 KERNEL :=$(PRODUCT_OUT)/obj/KERNEL_OBJ
-DTB := $(KERNEL)/arch/arm64/boot/dts/amlogic/s922d_odroidn2_android.dtb
+DTB := $(KERNEL)/arch/arm64/boot/dts/amlogic/meson64_odroidn2_android.dtb
 
 $(PRODUCT_OUT)/updatepackage.zip: \
 	build_bootloader bootimage \
