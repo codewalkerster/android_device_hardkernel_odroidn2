@@ -9,7 +9,7 @@ INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 
-KERNEL_DEVICETREE := s922d_odroidn2_android
+KERNEL_DEVICETREE := meson64_odroidn2_android
 KERNEL_DEFCONFIG := odroidn2_android_defconfig
 KERNEL_ARCH := arm64
 
