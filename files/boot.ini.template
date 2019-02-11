@@ -30,6 +30,7 @@ setenv label "android_9.0.0_Beta1"
 #    "2160p30hz"        | 3840x2160 Progressive 30Hz
 #    "2160p25hz"        | 3840x2160 Progressive 25Hz
 #    "2160p24hz"        | 3840x2160 Progressive 24Hz
+#    "smpte24hz"        | 3840x2160 Progressive 24Hz SMPTE
 #    "2160p60hz420"     | 3840x2160 Progressive 60Hz YCbCr 4:2:0
 #    "2160p50hz420"     | 3840x2160 Progressive 50Hz YCbCr 4:2:0
 #    "640x480p60hz"     | 640x480 Progressive 60Hz
@@ -50,9 +51,21 @@ setenv label "android_9.0.0_Beta1"
 #    "2560x1600p60hz"   | 2560x1600 Progressive 60Hz
 #    "3440x1440p60hz"   | 3440x1440 Progressive 60Hz
 setenv hdmimode "1080p60hz"
-setenv outputmode "1080p60hz"
+
+### voutmode : hdmi or dvi
+setenv voutmode "hdmi"
+# setenv voutmode "dvi"
 
 setenv cvbsmode "576cvbs"
+
+# Display Auto Detection
+# "false" or "true"
+setenv display_autodetect "true"
+
+### Custom modeline
+# setenv hdmimode "custombuilt"
+### 2560x1440p60hz sample
+# setenv modeline "2560,1440,241500,88800,60,2560,2608,2640,2720,1440,1442,1447,1481,1,1,1"
 
 # disable vu7
 setenv disable_vu7 "false"
@@ -93,8 +106,6 @@ setenv rootopt "rootfstype=ramfs init=/init"
 setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000"
 setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
 
-setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53}"
-
 # dtbs & boot addr
 setenv dtb_mem_addr 0x1000000
 setenv loadaddr 0x1080000
@@ -106,6 +117,17 @@ setenv EnableSelinux "permissive"
 setenv display_layer "osd0"
 setenv fb_addr "0x3d800000"
 
+# Boot Arguments
+if test "${display_autodetect}" = "true"; then hdmitx edid; fi
+# TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
+if test "${hdmimode}" = "custombuilt";
+then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}";
+else setenv cmode ""
+fi
+
+setenv outputmode ${hdmimode}
+
+setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode}"
 ############################################################
 #
 # NOT IMPLEMENTED.
@@ -114,27 +136,11 @@ setenv fb_addr "0x3d800000"
 # gpio power key : J2 (2x20) Pin#35, GPIOY.BIT3
 #setenv gpiopower "214"
 
-#setenv hdmitx "hdmitx=${cecconfig}"
-#if test "${hdmi_forcergb}" = "1"; then setenv hdmitx "hdmitx=forcergb"; fi
-#
-#if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
-#if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline}"; fi
-
-# HDMI/DVI Mode Configuration
-# This will enforce the signal type of display
-# "hdmi" - For HDMI interface
-# "dvi" - For DVI interface
-# setenv vout_mode "hdmi"
-
 # Enable backlight_pwm
 # disable : backlight "no"
 # ODROID-VU5/7 : backlight "yes"
 # ODROID-VU8 : backlight "invert"
 #setenv backlight_pwm "no"
-
-# Display Auto Detection
-# "false" or "true"
-#setenv display_autodetect "true"
 
 #showddrclk
 
