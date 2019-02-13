@@ -86,9 +86,20 @@ setenv video_reverse "0"
 #
 ############################################################
 
-setenv max_freq_a73 "1704"
+### A73 max cpu frequency sets
+# setenv max_freq_a73 "1992" # 1.992GHz
+# setenv max_freq_a73 "1932" # 1.932GHz
+# setenv max_freq_a73 "1920" # 1.920GHz
+# setenv max_freq_a73 "1908" # 1.908GHz
+# setenv max_freq_a73 "1800" # 1.800GHz
+# setenv max_freq_a73 "1704" # 1.704GHz
+setenv max_freq_a73 "1800"
 setenv governor_a73 "performance"
 
+### A53 max cpu frequency sets
+# setenv max_freq_a53 "1992" # 1.992GHz
+# setenv max_freq_a53 "1896" # 1.896GHz
+# setenv max_freq_a53 "1704" # 1.704GHz
 setenv max_freq_a53 "1896"
 setenv governor_a53 "performance"
 
