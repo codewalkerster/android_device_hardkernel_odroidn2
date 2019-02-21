@@ -31,8 +31,6 @@ setenv label "android_9.0.0_Beta1"
 #    "2160p25hz"        | 3840x2160 Progressive 25Hz
 #    "2160p24hz"        | 3840x2160 Progressive 24Hz
 #    "smpte24hz"        | 3840x2160 Progressive 24Hz SMPTE
-#    "2160p60hz420"     | 3840x2160 Progressive 60Hz YCbCr 4:2:0
-#    "2160p50hz420"     | 3840x2160 Progressive 50Hz YCbCr 4:2:0
 #    "640x480p60hz"     | 640x480 Progressive 60Hz
 #    "800x480p60hz"     | 800x480 Progressive 60Hz
 #    "800x600p60hz"     | 800x600 Progressive 60Hz
