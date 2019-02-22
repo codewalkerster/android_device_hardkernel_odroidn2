@@ -119,9 +119,6 @@ setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.consol
 setenv dtb_mem_addr 0x1000000
 setenv loadaddr 0x1080000
 
-# Selinux
-setenv EnableSelinux "permissive"
-
 # logo
 setenv display_layer "osd0"
 setenv fb_addr "0x3d800000"
@@ -129,38 +126,8 @@ setenv fb_addr "0x3d800000"
 # Boot Arguments
 if test "${display_autodetect}" = "true"; then hdmitx edid; fi
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
-if test "${hdmimode}" = "custombuilt";
-then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}";
-else setenv cmode ""
-fi
+if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
 
 setenv outputmode ${hdmimode}
 
 setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode}"
-############################################################
-#
-# NOT IMPLEMENTED.
-#
-############################################################
-# gpio power key : J2 (2x20) Pin#35, GPIOY.BIT3
-#setenv gpiopower "214"
-
-# Enable backlight_pwm
-# disable : backlight "no"
-# ODROID-VU5/7 : backlight "yes"
-# ODROID-VU8 : backlight "invert"
-#setenv backlight_pwm "no"
-
-#showddrclk
-
-#showlogo ${hdmimode}
-
-# HPD enable/disable option
-#setenv disablehpd "false"
-
-# suspend_hdmiphy=0
-# setenv led_onoff "on"
-
-# Force HDMI to use RGB colorspace regardless of TV request
-# setenv hdmi_forcergb "0"      # Disabled
-# setenv hdmi_forcergb "1"        # Enabled
