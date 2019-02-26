@@ -85,6 +85,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
 	dd if=$(PRODUCT_OUT)/u-boot.bin of=$@ conv=fsync bs=512 seek=1
+	dd if=/dev/zero of=$@ conv=fsync bs=512 seek=2048 count=16 # 8 K Bytes
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=2056
 	dd if=$(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/arm64/boot/dts/amlogic/$(DTBS) of=$@ conv=fsync bs=512 seek=6160
 	dd if=$(BOOT_IMG) of=$@ conv=fsync bs=512 seek=6416
