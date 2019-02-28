@@ -48,7 +48,6 @@ TARGET_NO_RADIOIMAGE := true
 
 TARGET_BOARD_PLATFORM := odroidn2
 TARGET_BOOTLOADER_BOARD_NAME := odroidn2
-BOARD_INSTALL_VULKAN := ture
 
 # Allow passing `--second` to mkbootimg via 2ndbootloader.
 TARGET_BOOTLOADER_IS_2ND := false
