@@ -398,6 +398,9 @@ PRODUCT_PACKAGES += \
 # Updater
 PRODUCT_PACKAGES += updater
 
+PRODUCT_PACKAGES += \
+     com.android.future.usb.accessory
+
 ifneq ($(TARGET_BUILD_LIVETV),true)
 TARGET_BUILD_LIVETV := false
 endif
