@@ -58,7 +58,7 @@ setenv cvbsmode "576cvbs"
 
 # Display Auto Detection
 # "false" or "true"
-setenv display_autodetect "false"
+setenv display_autodetect "true"
 
 ### Custom modeline
 # setenv hdmimode "custombuilt"
