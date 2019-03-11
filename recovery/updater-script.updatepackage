@@ -39,13 +39,11 @@ ui_print("   'system' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/system", "/system");
 package_extract_dir("system", "/system");
 
-set_progress(0.7000);
+set_progress(0.7500);
 
 ui_print("   'product' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/product", "/product");
 package_extract_dir("product", "/product");
-
-set_progress(0.8000);
 
 set_progress(0.9000);
 
