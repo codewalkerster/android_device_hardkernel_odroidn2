@@ -114,6 +114,7 @@ setenv test_mt_pid "0000"
 setenv rootopt "rootfstype=ramfs init=/init"
 setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000"
 setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
+setenv androidopt "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2 --cmdline otg_device=1 buildvariant=eng"
 
 # dtbs & boot addr
 setenv dtb_mem_addr 0x1000000
@@ -122,12 +123,22 @@ setenv loadaddr 0x1080000
 # logo
 setenv display_layer "osd0"
 setenv fb_addr "0x3d800000"
+setenv logo "${display_layer} ${fb_addr}"
 
 # Boot Arguments
 if test "${display_autodetect}" = "true"; then hdmitx edid; fi
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
 if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
 
-setenv outputmode ${hdmimode}
+setenv outputmode "${hdmimode}"
+
+setenv vout "${outputmode},enable"
 
 setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode}"
+
+setenv bootargs "${initargs} ${androidopt} logo=${logo} vout=${vout} cvbsmod=${cvbsmode} hdmimode=${hdmimode} osd_reverse=${osd_reverse} video_reverse=${video_reverse}"
+
+movi read boot 0 ${loadaddr}
+movi read dtbs 0 ${dtb_mem_addr}
+booti ${loadaddr} - ${dtb_mem_addr}
+bootm
