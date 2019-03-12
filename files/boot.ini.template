@@ -54,7 +54,10 @@ setenv hdmimode "1080p60hz"
 setenv voutmode "hdmi"
 # setenv voutmode "dvi"
 
-setenv cvbsmode "480cvbs"
+### CVBS encoder : 480CVBS or 576CVBS
+#   "480cvbs"   | NTSC, 480i
+#   "576cvbs"   | PAL, 576i
+#setenv cvbsmode "576cvbs"
 
 # Display Auto Detection
 # "false" or "true"
