@@ -144,4 +144,3 @@ setenv bootargs "${initargs} ${androidopt} logo=${logo} vout=${vout} cvbsmod=${c
 movi read boot 0 ${loadaddr}
 movi read dtbs 0 ${dtb_mem_addr}
 booti ${loadaddr} - ${dtb_mem_addr}
-bootm
