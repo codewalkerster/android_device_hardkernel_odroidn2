@@ -116,6 +116,9 @@ setenv test_mt_pid "0000"
 #
 ############################################################
 
+# Wake on Lan
+setenv enable_wol "0"
+
 # Init args
 setenv rootopt "rootfstype=ramfs init=/init"
 setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000"
@@ -142,7 +145,7 @@ setenv vout "${outputmode},enable"
 
 setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode}"
 
-setenv bootargs "${initargs} ${androidopt} logo=${logo} vout=${vout} cvbsmode=${cvbsmode} hdmimode=${hdmimode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower}"
+setenv bootargs "${initargs} ${androidopt} logo=${logo} vout=${vout} cvbsmode=${cvbsmode} hdmimode=${hdmimode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
 
 movi read boot 0 ${loadaddr}
 movi read dtbs 0 ${dtb_mem_addr}
