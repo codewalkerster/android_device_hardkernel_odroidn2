@@ -81,6 +81,7 @@ setenv zoom_rate "100"
 setenv osd_reverse "0"
 setenv video_reverse "0"
 
+setenv colorattribute "444,8bit"
 ############################################################
 #
 # CPU
@@ -124,6 +125,7 @@ setenv rootopt "rootfstype=ramfs init=/init"
 setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000"
 setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
 setenv touchopt "touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y}"
+setenv displayopt "colorattribute=${colorattribute}"
 setenv testmtopt "test_mt_vid=${test_mt_vid} test_mt_pid=${test_mt_pid}"
 setenv androidopt "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2 otg_device=1 buildvariant=eng"
 setenv miscopt "disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${testmtopt}"
@@ -144,7 +146,7 @@ if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} c
 
 setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode} ${miscopt}"
 
-setenv bootargs "${initargs} ${androidopt} logo=${logo} cvbsmode=${cvbsmode} hdmimode=${hdmimode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
+setenv bootargs "${initargs} ${androidopt} ${displayopt} logo=${logo} cvbsmode=${cvbsmode} hdmimode=${hdmimode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
 
 movi read boot 0 ${loadaddr}
 movi read dtbs 0 ${dtb_mem_addr}
