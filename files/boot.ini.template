@@ -134,7 +134,7 @@ setenv loadaddr 0x1080000
 # logo
 setenv display_layer "osd0"
 setenv fb_addr "0x3d800000"
-setenv logo "${display_layer} ${fb_addr}"
+setenv logo "${display_layer},loaded,${fb_addr}"
 
 # Boot Arguments
 if test "${display_autodetect}" = "true"; then hdmitx edid; fi
