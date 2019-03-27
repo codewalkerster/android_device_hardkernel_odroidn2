@@ -125,7 +125,8 @@ setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uar
 setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
 setenv touchopt "touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y}"
 setenv testmtopt "test_mt_vid=${test_mt_vid} test_mt_pid=${test_mt_pid}"
-setenv androidopt "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2 otg_device=1 buildvariant=eng disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${testmtopt}"
+setenv androidopt "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2 otg_device=1 buildvariant=eng"
+setenv miscopt "disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${testmtopt}"
 
 # dtbs & boot addr
 setenv dtb_mem_addr 0x1000000
@@ -145,7 +146,7 @@ setenv outputmode "${hdmimode}"
 
 setenv vout "${outputmode},enable"
 
-setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode}"
+setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode} ${miscopt}"
 
 setenv bootargs "${initargs} ${androidopt} logo=${logo} vout=${vout} cvbsmode=${cvbsmode} hdmimode=${hdmimode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
 
