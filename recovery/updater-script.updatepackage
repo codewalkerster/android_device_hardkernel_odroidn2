@@ -21,6 +21,11 @@ ui_print("   Bootloader is flashing...");
 package_extract_file("u-boot.bin", "/tmp/u-boot.bin");
 run_program("/sbin/dd", "if=/tmp/u-boot.bin", "of=/dev/block/bootloader");
 
+set_progress(0.1500);
+
+ui_print("   Bootloader env is Clear...");
+run_program("/sbin/dd", "if=/dev/zero", "of=/dev/block/env");
+
 set_progress(0.2000);
 
 ui_print("   'boot' partition is flashing...");
@@ -101,11 +106,6 @@ run_program("/sbin/chmod", "755", "/system/bin/fw_printenv");
 run_program("/sbin/chmod", "755", "/system/bin/screencontrol");
 run_program("/sbin/chown", "root:shell", "/system/bin/screencontrol");
 run_program("/sbin/chmod", "751", "/system/xbin/su");
-
-run_program("/system/bin/fw_setenv", "loadaddr", "0x1080000");
-run_program("/system/bin/fw_setenv", "cramfsaddr", "0x20000000");
-run_program("/system/bin/fw_setenv", "boot_recovery", "hdmitx edid; if test ${hdmimode} = custombuilt; then setenv cmode modeline=${modeline} customwidth=${customwidth} customheight=${customheight}; fi; if test ${hdmimode} == 2160p*; then setenv hdmimode 1080p60hz; fi; setenv bootargs ${initargs} logo=${display_layer},loaded,${fb_addr} vout=${hdmimode},enable hdmimode=${hdmimode} ${cmode} voutmode=${voutmode} cvbsmode=${cvbsmode} osd_reverse=${osd_reverse} video_reverse=${video_reverse} androidboot.selinux=permissive jtag=disable androidboot.hardware=odroidn2 recovery_part=recovery recovery_offset=0; movi read dtbs 0 ${cramfsaddr}; cramfsload ${dtb_mem_addr} meson64_odroidn2_android.dtb;if test ${variant} != c4; then cramfsload ${loadaddr} odroid${variant}-opp.dtbo;fdt addr ${dtb_mem_addr};fdt resize 8192;fdt apply ${loadaddr};fi;movi read recovery 0 ${loadaddr}; booti ${loadaddr} - ${dtb_mem_addr}; bootm ${loadaddr};");
-run_program("/system/bin/fw_setenv", "boot_rawimage", "setenv bootargs ${initargs} logo=${display_layer},loaded,${fb_addr} vout=${outputmode},enable cvbsmode=${cvbsmode} hdmimode=${hdmimode} osd_reverse=${osd_reverse} video_reverse=${video_reverse} androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2; movi read dtbs 0 ${cramfsaddr}; cramfsload ${dtb_mem_addr} meson64_odroidn2_android.dtb;if test ${variant} != c4; then cramfsload ${loadaddr} odroid${variant}-opp.dtbo;fdt addr ${dtb_mem_addr};fdt resize 8192;fdt apply ${loadaddr};fi;movi read boot 0 ${loadaddr}; booti ${loadaddr} - ${dtb_mem_addr}; bootm ${loadaddr};");
 
 # odroidthings service
 run_program("/sbin/chmod", "755", "/vendor/bin/hw/vendor.hardkernel.hardware.odroidthings@1.0-service");
