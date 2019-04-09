@@ -44,6 +44,12 @@ ui_print("   'system' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/system", "/system");
 package_extract_dir("system", "/system");
 
+if
+  sha1_check(read_file("/system/etc/g.prop")) != ""
+then
+  run_program("/sbin/rm", "-rf", "/system/priv-app/PackageInstaller/");
+endif;
+
 set_progress(0.7500);
 
 ui_print("   'product' partition is extracting...");
