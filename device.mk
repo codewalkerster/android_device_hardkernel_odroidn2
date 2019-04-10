@@ -115,4 +115,6 @@ PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn2/files/odroid-usbgps.xml:root/odroid-usbgps.xml \
     device/hardkernel/odroidn2/files/boot.ini.template:vendor/etc/boot.ini.template \
     device/hardkernel/odroidn2/files/hardkernel-720.bmp.gz:vendor/etc/hardkernel-720.bmp.gz \
-    device/hardkernel/odroidn2/files/makebootini:vendor/bin/makebootini
+    device/hardkernel/odroidn2/files/makebootini:vendor/bin/makebootini \
+    device/hardkernel/odroidn2/files/default.prop.template:vendor/etc/default.prop.template \
+    device/hardkernel/odroidn2/files/makedefaultprop:vendor/bin/makedefaultprop

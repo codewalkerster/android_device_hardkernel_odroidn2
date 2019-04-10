@@ -39,6 +39,7 @@ ui_print("   boot.ini is copying to FAT partition");
 mount("vfat", "EMMC", "/dev/block/odm", "/sdcard");
 mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/sdcard/boot.ini");
+run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/sdcard/default.prop");
 run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/sdcard/boot-logo.bmp.gz");
 unmount("/vendor");
 unmount("/sdcard");

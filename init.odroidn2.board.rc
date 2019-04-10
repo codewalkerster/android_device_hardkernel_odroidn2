@@ -47,5 +47,13 @@ service makebootini /vendor/bin/makebootini
     disabled
     oneshot
 
+service makedefaultprop /vendor/bin/makedefaultprop
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+
 on property:dev.bootcomplete=1
     start makebootini
+    start makedefaultprop
