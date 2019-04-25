@@ -1,6 +1,7 @@
 import /vendor/etc/init/hw/init.odroidn2.usb.rc
 
 on early-init
+    start watchdogd
     loglevel 3
 
     mount configfs configfs /sys/kernel/config
