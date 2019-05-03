@@ -378,6 +378,9 @@ PRODUCT_PACKAGES += su
 # GPS
 PRODUCT_PACKAGES += gps.$(PRODUCT_DEVICE)
 
+# VU backlights
+PRODUCT_PACKAGES += lights.$(PRODUCT_DEVICE)
+
 include device/hardkernel/common/gpu/gondul-user-arm64.mk
 
 PRODUCT_PACKAGES += \
