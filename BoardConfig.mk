@@ -165,7 +165,11 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 #PRODUCT_SHIPPING_API_LEVEL := 28
 TARGET_USES_MKE2FS := true
 
-DEVICE_MANIFEST_FILE := device/hardkernel/$(PRODUCT_DIR)/manifest.xml
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+DEVICE_MANIFEST_FILE := device/hardkernel/common/products/mbox/manifest/manifest_aosp.xml
+else
+DEVICE_MANIFEST_FILE := device/hardkernel/common/products/mbox/manifest/manifest_gtvs.xml
+endif
 #DEVICE_MATRIX_FILE   := device/hardkernel/common/compatibility_matrix.xml
 
 BOARD_VNDK_VERSION := current

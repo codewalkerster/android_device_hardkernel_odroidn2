@@ -2,7 +2,6 @@ import /vendor/etc/init/hw/init.odroid.usb.rc
 import /vendor/etc/init/hw/init.odroid.board.rc
 import /vendor/etc/init/hw/init.odroid.wifi.rc
 import /vendor/etc/init/hw/init.odroid.media.rc
-import /vendor/etc/init/hw/init.mtk.rc
 import /vendor/etc/init/android.hardware.bluetooth@1.0-service.btlinux.rc
 
 on early-init
@@ -23,6 +22,8 @@ on init
     chmod 666 /sys/class/video/video_inuse
     chmod 666 /sys/class/video/axis
     chmod 666 /sys/class/video/disable_video
+    chmod 666 /sys/class/video/axis_pip
+    chmod 666 /sys/class/video/disable_videopip
     chmod 666 /sys/class/tsync/enable
     chmod 666 /sys/class/tsync/apts_lookup
     chmod 666 /sys/class/tsync/pts_pcrscr
@@ -31,6 +32,7 @@ on init
     chmod 666 /sys/class/tsync/event
     chmod 666 /sys/class/tsync/av_threshold_min
     chmod 666 /sys/class/video/screen_mode
+    chmod 666 /sys/class/video/screen_mode_pip
     chmod 666 /sys/class/vdec/poweron_clock_level
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chown system system /sys/class/graphics/fb0/osd_afbcd
@@ -45,19 +47,14 @@ on init
     # for zram
     mkdir /swap_zram0 0700 root root
 
-    # for tee
-    mkdir /tee 0700 system system
-
     # Power Off trigger node
     chmod 0222 /sys/class/odroid/poweroff_trigger
 
 on fs
     mkdir /mnt/vendor/factory 0755 root root
     mkdir /mnt/vendor/swap_zram0 0700 root root
-    mkdir /mnt/vendor/tee 0700 system system
     mount_all /vendor/etc/fstab.odroidn2
     setprop ro.crypto.fuse_sdcard true
-    swapon_all /vendor/etc/fstab.odroidn2
     restorecon_recursive /mnt/vendor/param
 
 on post-fs-data
@@ -90,7 +87,6 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/btwrite
     chmod 0660 /proc/bluetooth/sleep/lpm
     # change back to bluetooth from system
-    chown bluetooth bluetooth /data/misc/bluetooth
 
     chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_ch
     chmod 0664 /sys/class/amhdmitx/amhdmitx0/aud_ch
@@ -124,8 +120,11 @@ on boot
 
     chown media system /sys/class/video/blackout_policy
     chown media system /sys/class/video/screen_mode
+    chown media system /sys/class/video/screen_mode_pip
     chown media system /sys/class/video/axis
     chown media system /sys/class/video/disable_video
+    chown media system /sys/class/video/axis_pip
+    chown media system /sys/class/video/disable_videopip
     chown media system /sys/class/video/zoom
     chown media system /sys/class/video/free_keep_buffer
     chown media system /sys/class/video/free_cma_buffer
@@ -153,7 +152,10 @@ on boot
 # default support XBMC
     chmod 666 /sys/class/video/axis
     chmod 666 /sys/class/video/screen_mode
+    chmod 666 /sys/class/video/screen_mode_pip
     chmod 666 /sys/class/video/disable_video
+    chmod 666 /sys/class/video/axis_pip
+    chmod 666 /sys/class/video/disable_videopip
     chmod 666 /sys/class/tsync/pts_pcrscr
     chmod 666 /dev/amstream_abuf
     chmod 666 /dev/amstream_hevc
@@ -172,6 +174,7 @@ on boot
     chmod 666 /dev/amstream_dves_avc
     chmod 666 /dev/amstream_dves_hevc
     chmod 666 /dev/ionvideo
+    chmod 666 /dev/videosync
 #add for XBMC BlueRay 3d and audio Passthrough
     chmod 666 /sys/class/audiodsp/digital_raw
     chmod 666 /sys/class/audiodsp/digital_codec
@@ -218,7 +221,7 @@ on boot
     chown media system /dev/dvb0.demux2
     chown media system /dev/dvb0.dvr0
     chown media system /dev/dvb0.dvr1
-    chmod media system /dev/dvb0.dvr2
+    chown media system /dev/dvb0.dvr2
 
     chown media system /sys/class/stb/demux0_source
     chown media system /sys/class/stb/demux1_source
@@ -438,15 +441,11 @@ service hdcp_rx22 /vendor/bin/hdcp_rx22 \
     oneshot
     seclabel u:r:hdcp_rx22:s0
 
-service factoryreset /vendor/bin/factoryreset.sh
-    class main
-    user root
-    group root
-    oneshot
-    seclabel u:r:install_recovery:s0
-
 service bugreport /system/bin/dumpstate -d -p -B -P -z \
     -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main
     disabled
     oneshot
+on property:sys.boot_completed=1
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.odroidn2

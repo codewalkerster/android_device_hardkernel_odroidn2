@@ -80,41 +80,9 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     drm.service.enabled=1
 
-#used forward seek for libplayer
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    media.libplayer.seek.fwdsearch=1
-
-#fix hls sync
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    libplayer.livets.softdemux=1 \
-    libplayer.netts.recalcpts=1
-
 #map volume
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.audio.mapvalue=0,0,0,0
-
-#By default, primary storage is physical
-PRODUCT_PROPERTY_OVERRIDES += \
-    #ro.vold.primary_physical=true
-#Support storage visible to apps
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    persist.fw.force_adoptable=true
-
-#use sdcardfs
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.sys.sdcardfs=true
-
-#add livhls,libcurl as default hls
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    media.libplayer.curlenable=true \
-    media.libplayer.modules=vhls_mod,dash_mod,curl_mod,prhls_mod,vm_mod,bluray_mod
-
-
-#Hdmi In
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.sys.hdmiin.enable=true \
-    mbx.hdmiin.switchfull=false \
-    mbx.hdmiin.videolayer=false
 
 #adb
 PRODUCT_PROPERTY_OVERRIDES +=  \
@@ -133,3 +101,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.hdmi.device_type=4
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.support.network_led=true
