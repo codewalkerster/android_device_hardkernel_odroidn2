@@ -110,6 +110,13 @@ setenv governor_a53 "performance"
 setenv test_mt_vid "0000"
 setenv test_mt_pid "0000"
 
+# Enable backlight_pwm
+# disable : backlight "no"
+# ODROID-VU5/7 : backlight "yes"
+# ODROID-VU8 : backlight "invert"
+setenv backlight_pwm "yes"
+
+
 # gpio power key :  GPIOX.3 (Pin 11) of 2x20 pins connector
 #setenv gpiopower "479"
 
@@ -128,7 +135,7 @@ setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uar
 setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
 setenv touchopt "touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y}"
 setenv displayopt "colorattribute=${colorattribute}"
-setenv testmtopt "test_mt_vid=${test_mt_vid} test_mt_pid=${test_mt_pid}"
+setenv testmtopt "test_mt_vid=${test_mt_vid} test_mt_pid=${test_mt_pid} backlight_pwm=${backlight_pwm}"
 setenv androidopt "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2 otg_device=1 buildvariant=eng"
 setenv miscopt "disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${testmtopt} suspend_hdmiphy=${suspend_hdmiphy}"
 
