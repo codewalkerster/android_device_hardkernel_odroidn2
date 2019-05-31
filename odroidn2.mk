@@ -378,6 +378,11 @@ PRODUCT_PACKAGES += gps.$(PRODUCT_DEVICE)
 # VU backlights
 PRODUCT_PACKAGES += lights.$(PRODUCT_DEVICE)
 
+# U-Boot Env Tools
+PRODUCT_PACKAGES += \
+    fw_printenv \
+    fw_setenv
+
 include device/hardkernel/common/gpu/gondul-user-arm64.mk
 
 PRODUCT_PACKAGES += \
