@@ -54,6 +54,10 @@ then
   run_program("/sbin/rm", "-rf", "/system/priv-app/PackageInstaller/");
 endif;
 
+ui_print("   change permission for fw_setenv, fw_printenv");
+run_program("/sbin/chmod", "755", "/system/bin/fw_setenv");
+run_program("/sbin/chmod", "755", "/system/bin/fw_printenv");
+
 set_progress(0.7500);
 
 ui_print("   'product' partition is extracting...");
