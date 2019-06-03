@@ -92,9 +92,9 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     osd.afbcd.enable=1
 
-# default enable sdr to hdr
+# default disable sdr to hdr
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.sdr2hdr.enable=true
+    ro.vendor.sdr2hdr.enable=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0
