@@ -42,6 +42,9 @@ ui_print("   change permission for makedefaultprop");
 run_program("/sbin/chmod", "755", "/vendor/bin/makedefaultprop");
 run_program("/sbin/chown", "root:shell", "/vendor/bin/makedefaultprop");
 
+ui_print("   remove lowmemorykiller config files.");
+run_program("/sbin/rm", "-rf", "/vendor/etc/lowmemorykiller*.txt");
+
 set_progress(0.6000);
 
 ui_print("   'system' partition is extracting...");
