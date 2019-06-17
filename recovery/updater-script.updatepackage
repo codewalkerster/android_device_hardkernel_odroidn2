@@ -9,11 +9,6 @@ ui_print("   Bootloader is flashing...");
 package_extract_file("u-boot.bin", "/tmp/u-boot.bin");
 run_program("/sbin/dd", "if=/tmp/u-boot.bin", "of=/dev/block/bootloader");
 
-set_progress(0.1500);
-
-ui_print("   Bootloader env is Clear...");
-run_program("/sbin/dd", "if=/dev/zero", "of=/dev/block/env");
-
 set_progress(0.2000);
 
 ui_print("   'boot' partition is flashing...");
