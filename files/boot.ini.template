@@ -131,7 +131,7 @@ setenv enable_wol "0"
 
 # Init args
 setenv rootopt "rootfstype=ramfs init=/init"
-setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000"
+setenv consoleopt "console=ttyS0,115200n8 no_console_suspend earlyprintk=aml-uart,0xff803000 quiet"
 setenv ramoopsopt "ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000"
 setenv touchopt "touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y}"
 setenv displayopt "colorattribute=${colorattribute}"
