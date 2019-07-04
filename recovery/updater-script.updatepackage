@@ -32,6 +32,7 @@ set_progress(0.5000);
 ui_print("   'vendor' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
 package_extract_dir("vendor", "/vendor");
+run_program("/sbin/ln", "-sf", "/vendor/lib/egl/libGLES_mali.so", "/vendor/lib/hw/vulkan.odroidn2.so");
 
 ui_print("   change permission for makedefaultprop");
 run_program("/sbin/chmod", "755", "/vendor/bin/makedefaultprop");
