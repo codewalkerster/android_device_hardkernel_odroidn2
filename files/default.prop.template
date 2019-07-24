@@ -1,5 +1,4 @@
 ro.service.bt.a2dp_sink=false
 qemu.hw.mainkeys=0
-ro.kernel.android.gps=/dev/ttyACM
+ro.kernel.android.gps=ttyACM
 ro.gps.id.vendor=1546
-ro.gps.id.product=01a7
