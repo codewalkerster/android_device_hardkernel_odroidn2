@@ -84,6 +84,7 @@ setenv video_reverse "0"
 setenv colorattribute "444,8bit"
 
 setenv suspend_hdmiphy "1"
+setenv heartbeat "1"
 ############################################################
 #
 # CPU
@@ -159,5 +160,7 @@ setenv bootargs "${initargs} ${androidopt} ${displayopt} logo=${logo} cvbsmode=$
 
 movi read boot 0 ${loadaddr}
 movi read dtbs 0 ${dtb_mem_addr}
+fdt addr ${dtb_mem_addr}
+if test "${heartbeat}" = "0"; then fdt set /leds/blueled linux,default-trigger "none"; fi
 booti ${loadaddr} - ${dtb_mem_addr}
 bootm
