@@ -85,6 +85,7 @@ setenv colorattribute "444,8bit"
 
 setenv suspend_hdmiphy "1"
 setenv heartbeat "1"
+setenv sg_tablesize "2"
 ############################################################
 #
 # CPU
@@ -138,7 +139,7 @@ setenv touchopt "touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_
 setenv displayopt "colorattribute=${colorattribute}"
 setenv testmtopt "test_mt_vid=${test_mt_vid} test_mt_pid=${test_mt_pid} backlight_pwm=${backlight_pwm}"
 setenv androidopt "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable androidboot.hardware=odroidn2 otg_device=1 buildvariant=eng"
-setenv miscopt "disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${testmtopt} suspend_hdmiphy=${suspend_hdmiphy}"
+setenv miscopt "disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${testmtopt} suspend_hdmiphy=${suspend_hdmiphy} usb-xhci.tablesize=${sg_tablesize}"
 
 # dtbs & boot addr
 setenv dtb_mem_addr 0x1000000
