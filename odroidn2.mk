@@ -21,7 +21,9 @@ PRODUCT_DIR := odroidn2
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
-#TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
+#
+ANDROID_BUILD_TYPE := 64
+TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
 
 # Inherit from those products. Most specific first.
 ifeq ($(ANDROID_BUILD_TYPE), 64)
@@ -32,7 +34,7 @@ $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
 
-BOARD_INSTALL_VULKAN := true
+BOARD_INSTALL_VULKAN := false
 
 $(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/hardkernel/common/products/mbox/product_mbox.mk)
