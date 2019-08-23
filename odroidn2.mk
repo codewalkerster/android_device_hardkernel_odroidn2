@@ -87,7 +87,7 @@ PRODUCT_TYPE := mbox
 BOARD_AML_TDK_KEY_PATH := device/hardkernel/common/tdk_keys/
 WITH_LIBPLAYER_MODULE := false
 
-OTA_UP_PART_NUM_CHANGED := true
+OTA_UP_PART_NUM_CHANGED := false
 
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 
@@ -152,6 +152,16 @@ endif
 BOARD_CACHEIMAGE_PARTITION_SIZE := 1073741824
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
+
+########################################################################
+#
+#                           Kernel Arch
+#
+#
+#########################################################################
+#ifndef KERNEL_A32_SUPPORT
+#KERNEL_A32_SUPPORT := true
+#endif
 
 ########################################################################
 #
@@ -259,7 +269,22 @@ include device/hardkernel/common/audio.mk
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml \
 
+#########################################################################
+#
+#                                                GDC
+#
+#########################################################################
+BOARD_GDC_FW_BUILTIN := true
+BOARD_GDC_LIB := true
 
+ifeq ($(BOARD_GDC_FW_BUILTIN), true)
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/gdc,$(TARGET_COPY_OUT_VENDOR)/lib/firmware/gdc)
+endif
+
+ifeq ($(BOARD_GDC_LIB), true)
+PRODUCT_PACKAGES += libgdc
+endif
 
 #########################################################################
 #
