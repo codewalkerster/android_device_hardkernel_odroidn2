@@ -269,22 +269,7 @@ include device/hardkernel/common/audio.mk
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml \
 
-#########################################################################
-#
-#                                                GDC
-#
-#########################################################################
-BOARD_GDC_FW_BUILTIN := true
-BOARD_GDC_LIB := true
 
-ifeq ($(BOARD_GDC_FW_BUILTIN), true)
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/gdc,$(TARGET_COPY_OUT_VENDOR)/lib/firmware/gdc)
-endif
-
-ifeq ($(BOARD_GDC_LIB), true)
-PRODUCT_PACKAGES += libgdc
-endif
 
 #########################################################################
 #
@@ -347,6 +332,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.pppoe=true
 endif
+
+#################################################################################
+#
+#                                                DEFAULT LOWMEMORYKILLER CONFIG
+#
+#################################################################################
+BUILD_WITH_LOWMEM_COMMON_CONFIG := true
 
 BOARD_USES_USB_PM := true
 
