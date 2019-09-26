@@ -34,7 +34,7 @@ $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
 
-BOARD_INSTALL_VULKAN := false
+BOARD_INSTALL_VULKAN := true
 
 $(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/hardkernel/common/products/mbox/product_mbox.mk)
