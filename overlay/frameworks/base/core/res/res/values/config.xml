@@ -89,6 +89,10 @@
         <item>com.android.location.fused</item>
     </string-array>
 
+    <bool name="config_defaultInTouchMode">false</bool>
+    <!-- Whether the device uses the default focus highlight when focus state isn't specified. -->
+    <bool name="config_useDefaultFocusHighlight">false</bool>
+
     <!-- disable wallpaper, which may consume too much boot time -->
     <!-- cannot disable wallpaper, com.android.settings will crash! -->
     <!--bool name="config_enableWallpaperService">false</bool-->
