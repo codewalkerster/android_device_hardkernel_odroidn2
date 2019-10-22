@@ -2,3 +2,6 @@ ro.service.bt.a2dp_sink=false
 qemu.hw.mainkeys=0
 ro.kernel.android.gps=ttyACM
 ro.gps.id.vendor=1546
+hide.volume_buttons=false
+hide.screenshot_button=false
+hide.poweroff_button=false
