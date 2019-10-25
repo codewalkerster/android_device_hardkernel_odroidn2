@@ -38,9 +38,9 @@ run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtl8192cu.ko");
 run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtl_usb.ko");
 run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtlwifi.ko");
 
-ui_print("   overwrite /odm/default.prop...");
-mount("vfat", "EMMC", "/dev/block/odm", "/odm");
-run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
+#ui_print("   overwrite /odm/default.prop...");
+#mount("vfat", "EMMC", "/dev/block/odm", "/odm");
+#run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
 
 ui_print("   change permission for makedefaultprop");
 run_program("/sbin/chmod", "755", "/vendor/bin/makedefaultprop");
