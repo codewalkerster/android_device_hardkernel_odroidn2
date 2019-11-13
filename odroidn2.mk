@@ -21,7 +21,9 @@ PRODUCT_DIR := odroidn2
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
-#TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
+#
+ANDROID_BUILD_TYPE := 64
+TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
 
 # Inherit from those products. Most specific first.
 ifeq ($(ANDROID_BUILD_TYPE), 64)
@@ -87,7 +89,7 @@ PRODUCT_TYPE := mbox
 BOARD_AML_TDK_KEY_PATH := device/hardkernel/common/tdk_keys/
 WITH_LIBPLAYER_MODULE := false
 
-OTA_UP_PART_NUM_CHANGED := true
+OTA_UP_PART_NUM_CHANGED := false
 
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 
@@ -152,6 +154,16 @@ endif
 BOARD_CACHEIMAGE_PARTITION_SIZE := 1073741824
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
+
+########################################################################
+#
+#                           Kernel Arch
+#
+#
+#########################################################################
+#ifndef KERNEL_A32_SUPPORT
+#KERNEL_A32_SUPPORT := true
+#endif
 
 ########################################################################
 #
@@ -322,6 +334,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.pppoe=true
 endif
+
+#################################################################################
+#
+#                                                DEFAULT LOWMEMORYKILLER CONFIG
+#
+#################################################################################
+BUILD_WITH_LOWMEM_COMMON_CONFIG := true
 
 BOARD_USES_USB_PM := true
 

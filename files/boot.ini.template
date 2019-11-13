@@ -1,6 +1,6 @@
 ODROIDN2-UBOOT-CONFIG
 
-setenv bootlabel "Android Pie (32Bit)"
+setenv bootlabel "Android Pie (64Bit)"
 
 ############################################################
 #
