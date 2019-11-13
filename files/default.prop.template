@@ -5,3 +5,4 @@ ro.gps.id.vendor=1546
 hide.volume_buttons=false
 hide.screenshot_button=false
 hide.poweroff_button=false
+media.audio_hal.device=0
