@@ -27,6 +27,14 @@ PRODUCT_COPY_FILES += \
     device/hardkernel/common/products/mbox/ueventd.odroidn2.rc:recovery/root/ueventd.odroidn2.rc
 endif
 
+# DRM HAL
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl:32 \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.1-service.widevine \
+    android.hardware.drm@1.1-service.clearkey \
+    move_widevine_data.sh
+
 PRODUCT_COPY_FILES += \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \

@@ -42,9 +42,8 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.net.pppoe=true
 
-# Low memory platform
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.vendor.platform.support.dolbyvision=false
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.vendor.platform.support.dolbyvision=true
 
 #the prop is used for enable or disable
 #DD+/DD force output when HDMI EDID is not supported
@@ -69,8 +68,10 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #ro.vendor.platform.support.dtsmulasset=true
 #DTS-HD prop end
 # Enable player buildin
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    media.support.dolbyvision = false
+
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.support.dolbyvision = true
 
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES +=  \
@@ -79,6 +80,10 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 # Define drm for this device
 PRODUCT_PROPERTY_OVERRIDES +=  \
     drm.service.enabled=1
+
+#set memory upper limit for extractor process
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.media.maxmem=629145600
 
 #map volume
 PRODUCT_PROPERTY_OVERRIDES +=  \
@@ -89,8 +94,8 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     service.adb.tcp.port=5555
 
 #enable/disable afbc
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    osd.afbcd.enable=1
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.afbcd.enable=1
 
 # default disable sdr to hdr
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -104,3 +109,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.support.network_led=true
+
+#default media vol ,max 15
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.media_vol_default=8
