@@ -64,6 +64,8 @@ endif;
 ui_print("   change permission for fw_setenv, fw_printenv");
 run_program("/sbin/chmod", "755", "/system/bin/fw_setenv");
 run_program("/sbin/chmod", "755", "/system/bin/fw_printenv");
+run_program("/sbin/chmod", "755", "/system/bin/screencontrol");
+run_program("/sbin/chown", "root:shell", "/system/bin/screencontrol");
 
 set_progress(0.7500);
 
