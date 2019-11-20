@@ -1,5 +1,14 @@
 #assert(getprop("ro.build.product" == "odroidn2"));
 
+if
+  getprop("ro.product.cpu.abi") == "armeabi-v7a"
+then
+  mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
+  ui_print("This system is 32-bit. It will just update OdroidSettings and finish");
+  package_extract_file("vendor/app/OdroidSettings/OdroidSettings.apk", "/vendor/app/OdroidSettings/OdroidSettings.apk");
+  show_progress(1.0000, 0);
+else
+
 show_progress(1.0000, 0);
 
 ui_print("\n\nHardkernel's ODROID-N2 Android Update is started...");
@@ -77,3 +86,5 @@ set_progress(0.9000);
 
 ui_print("Android update is completed.\nHave fun with ODROID-N2!\n\n");
 set_progress(1.0000);
+
+endif;
