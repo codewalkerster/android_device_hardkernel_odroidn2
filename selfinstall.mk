@@ -18,6 +18,9 @@ SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
 BOOT_IMG := $(PRODUCT_OUT)/boot.img
 DTBS := meson64_odroidn2_android.dtb
+SELFINSTALL_BOOT_INI := boot.ini
+SELF_SRC_DIR := device/hardkernel/$(PRODUCT_DIR)/selfinstall
+MKFS_FAT := device/hardkernel/proprietary/bin/mkfs.fat
 
 VENDOR := vendor.img
 
@@ -25,6 +28,7 @@ SELFINSTALL_DIR := $(PRODUCT_OUT)/selfinstall
 SELFINSTALL_SIGNED_UPDATEPACKAGE := $(SELFINSTALL_DIR)/cache/update.zip
 BOOTLOADER_MESSAGE := $(SELFINSTALL_DIR)/BOOTLOADER_MESSAGE
 SELFINSTALL_CACHE_IMAGE := $(SELFINSTALL_DIR)/cache.ext4
+SELFINSTALL_ODM_IMAGE := $(SELFINSTALL_DIR)/odm.img
 
 #
 # Update image : update.zip
@@ -74,6 +78,15 @@ $(SELFINSTALL_DIR)/cache.img: $(SELFINSTALL_DIR)/cache
 $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 	simg2img $(SELFINSTALL_DIR)/cache.img $@
 
+.PHONY: $(SELFINSTALL_ODM_IMAGE)
+$(SELFINSTALL_ODM_IMAGE): \
+	$(INSTALLED_RECOVERYIMAGE_TARGET)
+	dd if=/dev/zero of=$@ bs=512 count=66526
+	$(MKFS_FAT) -F16 -n VFAT $@
+	$(FAT16COPY) $@ $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/arm64/boot/dts/amlogic/$(DTBS) \
+		$(SELF_SRC_DIR)/$(SELFINSTALL_BOOT_INI) \
+		$(INSTALLED_RECOVERYIMAGE_TARGET)
+
 #
 # Android Self-Installation
 #
@@ -82,7 +95,8 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	$(INSTALLED_RECOVERYIMAGE_TARGET) \
 	build_bootloader \
 	$(BOOT_IMG) \
-	$(SELFINSTALL_CACHE_IMAGE)
+	$(SELFINSTALL_CACHE_IMAGE) \
+	$(SELFINSTALL_ODM_IMAGE)
 	@echo "Creating installable single image file..."
 	dd if=/dev/urandom of=$@ conv=fsync bs=512 seek=1920 count=144 # 72K Bytes
 	dd if=$(PRODUCT_OUT)/u-boot.bin of=$@ conv=fsync bs=512 seek=1
@@ -92,6 +106,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	dd if=$(BOOT_IMG) of=$@ conv=fsync bs=512 seek=6416
 	dd if=$(INSTALLED_RECOVERYIMAGE_TARGET) of=$@ conv=fsync bs=512 seek=39184
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88336
+	dd if=$(SELFINSTALL_ODM_IMAGE) of=$@ conv=fsync bs=512 seek=2185488 count=66526
 	sync
 	@echo "Done."
 
