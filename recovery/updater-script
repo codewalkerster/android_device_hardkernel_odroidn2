@@ -35,11 +35,6 @@ run_program("/sbin/rm", "-rf", "/cache/update.zip");
 
 set_progress(0.7000);
 
-ui_print("   formatting /dev/block/odm for VFAT partition");
-run_program("/sbin/mkfs.vfat", "-n", "VFAT", "/dev/block/odm");
-
-set_progress(0.9000);
-
 ui_print("   boot.ini is copying to FAT partition");
 mount("vfat", "EMMC", "/dev/block/odm", "/sdcard");
 mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
