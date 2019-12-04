@@ -52,3 +52,7 @@ service makedefaultprop /vendor/bin/makedefaultprop
 on property:dev.bootcomplete=1
     start makebootini
     start makedefaultprop
+
+on property:dev.usbhub.reset=1
+    write /sys/devices/platform/gpio-reset/reset-usb_hub/control "reset"
+    setprop dev.usbhub.reset 0

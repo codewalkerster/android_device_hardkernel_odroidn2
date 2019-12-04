@@ -6,3 +6,4 @@ hide.volume_buttons=false
 hide.screenshot_button=false
 hide.poweroff_button=false
 media.audio_hal.device=0
+dev.usbhub.reset=0
