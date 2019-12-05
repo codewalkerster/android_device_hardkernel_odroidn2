@@ -1,5 +1,18 @@
 #assert(getprop("ro.build.product" == "odroidn2"));
 
+mount("ext4", "EMMC", "/dev/block/system", "/system");
+
+if
+  file_getprop("/system/build.prop", "ro.build.version.incremental") == "20191121" || file_getprop("/system/build.prop", "ro.build.version.incremental") == "20191204"
+then
+  mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
+  ui_print("The firmwares released on 20191121, 20191204 were included wrong updater. It will just update OdroidSettings and finish");
+  package_extract_file("vendor/app/OdroidSettings/OdroidSettings.apk", "/vendor/app/OdroidSettings/OdroidSettings.apk");
+  run_program("/sbin/sed", "-i", "s/^ro.build.version.incremental=.*/ro.build.version.incremental=20191025/g", "/system/build.prop");
+  show_progress(1.0000, 0);
+else
+
+
 show_progress(1.0000, 0);
 
 ui_print("\n\nHardkernel's ODROID-N2 Android Update is started...");
@@ -81,3 +94,5 @@ set_progress(0.9000);
 
 ui_print("Android update is completed.\nHave fun with ODROID-N2!\n\n");
 set_progress(1.0000);
+
+endif;
