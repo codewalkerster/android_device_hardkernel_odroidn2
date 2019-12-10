@@ -218,8 +218,13 @@ PRODUCT_COPY_FILES += \
 #                                                WiFi
 #
 #########################################################################
+#USE_AML_WIFI := ture
 WIFI_MODULE := multiwifi
+ifeq ($(USE_AML_WIFI), true)
+include hardware/amlogic/wifi/configs/wifi.mk
+else
 include device/hardkernel/common/wifi.mk
+endif
 
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
