@@ -2,7 +2,7 @@ import /vendor/etc/init/hw/init.odroid.usb.rc
 import /vendor/etc/init/hw/init.odroid.board.rc
 import /vendor/etc/init/hw/init.odroid.wifi.rc
 import /vendor/etc/init/hw/init.odroid.media.rc
-import /vendor/etc/init/android.hardware.bluetooth@1.0-service.btlinux.rc
+import /vendor/etc/init/android.hardware.bluetooth@1.0-service.${ro.bt.service}.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
