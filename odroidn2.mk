@@ -237,9 +237,8 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 #
 #########################################################################
 
-#BCMBT_SUPPORT := true
-#BCM_BLUETOOTH_LPM_ENABLE := true
 BOARD_HAVE_BLUETOOTH := true
+#BOARD_HAVE_BLUETOOTH_BCM := true
 include device/hardkernel/common/bluetooth.mk
 
 #########################################################################
@@ -253,9 +252,6 @@ include device/hardkernel/common/bluetooth.mk
 #    SmartRemote
 #PRODUCT_COPY_FILES += \
 #    frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
-
-
-#PRODUCT_PACKAGES += libbt-vendor
 
 ifeq ($(SUPPORT_HDMIIN),true)
 PRODUCT_PACKAGES += \
