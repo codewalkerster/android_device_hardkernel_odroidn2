@@ -21,10 +21,10 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += \
-    device/hardkernel/common/products/mbox/ueventd.odroidn2.rc:root/ueventd.odroidn2.rc
+    device/hardkernel/common/products/mbox/ueventd.odroid.rc:root/ueventd.odroidn2.rc
 else
 PRODUCT_COPY_FILES += \
-    device/hardkernel/common/products/mbox/ueventd.odroidn2.rc:recovery/root/ueventd.odroidn2.rc
+    device/hardkernel/common/products/mbox/ueventd.odroid.rc:recovery/root/ueventd.odroidn2.rc
 endif
 
 # DRM HAL
