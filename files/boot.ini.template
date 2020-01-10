@@ -45,9 +45,6 @@ setenv bootlabel "Android Pie (64Bit)"
 #    "1680x1050p60hz"   | 1680x1050 Progressive 60Hz
 #    "1920x1200p60hz"   | 1920x1200 Progressive 60Hz
 #    "2560x1080p60hz"   | 2560x1080 Progressive 60Hz
-#    "2560x1440p60hz"   | 2560x1440 Progressive 60Hz
-#    "2560x1600p60hz"   | 2560x1600 Progressive 60Hz
-#    "3440x1440p60hz"   | 3440x1440 Progressive 60Hz
 setenv hdmimode "1080p60hz"
 
 ### voutmode : hdmi or dvi
