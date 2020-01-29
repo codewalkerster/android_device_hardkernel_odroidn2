@@ -127,4 +127,6 @@ PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn2/files/hardkernel-720.bmp.gz:vendor/etc/hardkernel-720.bmp.gz \
     device/hardkernel/odroidn2/files/makebootini:vendor/bin/makebootini \
     device/hardkernel/odroidn2/files/default.prop.template:vendor/etc/default.prop.template \
-    device/hardkernel/odroidn2/files/makedefaultprop:vendor/bin/makedefaultprop
+    device/hardkernel/odroidn2/files/makedefaultprop:vendor/bin/makedefaultprop \
+    device/hardkernel/odroidn2/files/env.ini.template:vendor/etc/env.ini.template \
+    device/hardkernel/odroidn2/recovery/update_ini.sh:vendor/bin/update_ini.sh
