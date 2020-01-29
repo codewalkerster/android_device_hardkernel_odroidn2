@@ -50,9 +50,14 @@ run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtl8192cu.ko");
 run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtl_usb.ko");
 run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtlwifi.ko");
 
-#ui_print("   overwrite /odm/default.prop...");
-#mount("vfat", "EMMC", "/dev/block/odm", "/odm");
-#run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
+ui_print("   update the odm partition...");
+mount("vfat", "EMMC", "/dev/block/odm", "/odm");
+
+run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/odm/.env.ini.update");
+# parse env values from boot or env ini files and apply it to .env.ini.update
+run_program("/vendor/bin/update_ini.sh", "/boot.ini", "/odm/env.ini", "/odm/.env.ini.update");
+run_program("/sbin/mv", "/odm/.env.ini.update", "/odm/env.ini");
+run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/odm/boot.ini");
 
 #ui_print("   edit /odm/boot.ini...");
 #mount("vfat", "EMMC", "/dev/block/odm", "/odm");

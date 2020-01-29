@@ -2,135 +2,47 @@ ODROIDN2-UBOOT-CONFIG
 
 setenv bootlabel "Android Pie (64Bit)"
 
-############################################################
-#
-# Display & Touch
-#
-############################################################
-
-# Resolution Configuration
-# 'hdmimode' & 'outputmode' must be one of below to configure display resolution within
-# supported by your TV or monitor.
-# And both of values MUST be same.
-#    Symbol             | Resolution
-# ----------------------+-------------
-#    "480x320p60hz"     | 480x320 Progressive 60Hz
-#    "480p60hz"         | 720x480 Progressive 60Hz
-#    "576p50hz"         | 720x576 Progressive 50Hz
-#    "720p60hz"         | 1280x720 Progressive 60Hz
-#    "720p50hz"         | 1280x720 Progressive 50Hz
-#    "1080p60hz"        | 1920x1080 Progressive 60Hz
-#    "1080p50hz"        | 1920x1080 Progressive 50Hz
-#    "1080p30hz"        | 1920x1080 Progressive 30Hz
-#    "1080p24hz"        | 1920x1080 Progressive 24Hz
-#    "1080i60hz"        | 1920x1080 Interlaced 60Hz
-#    "1080i50hz"        | 1920x1080 Interlaced 50Hz
-#    "2160p60hz"        | 3840x2160 Progressive 60Hz
-#    "2160p50hz"        | 3840x2160 Progressive 50Hz
-#    "2160p30hz"        | 3840x2160 Progressive 30Hz
-#    "2160p25hz"        | 3840x2160 Progressive 25Hz
-#    "2160p24hz"        | 3840x2160 Progressive 24Hz
-#    "smpte24hz"        | 3840x2160 Progressive 24Hz SMPTE
-#    "640x480p60hz"     | 640x480 Progressive 60Hz
-#    "800x480p60hz"     | 800x480 Progressive 60Hz
-#    "800x600p60hz"     | 800x600 Progressive 60Hz
-#    "1024x600p60hz"    | 1024x600 Progressive 60Hz
-#    "1024x768p60hz"    | 1024x768 Progressive 60Hz
-#    "1280x800p60hz"    | 1280x800 Progressive 60Hz
-#    "1280x1024p60hz"   | 1280x1024 Progressive 60Hz
-#    "1360x768p60hz"    | 1360x768 Progressive 60Hz
-#    "1440x900p60hz"    | 1440x900 Progressive 60Hz
-#    "1600x900p60hz"    | 1600x900 Progressive 60Hz
-#    "1600x1200p60hz"   | 1600x1200 Progressive 60Hz
-#    "1680x1050p60hz"   | 1680x1050 Progressive 60Hz
-#    "1920x1200p60hz"   | 1920x1200 Progressive 60Hz
-#    "2560x1080p60hz"   | 2560x1080 Progressive 60Hz
+###################
+# Default values
+###################
 setenv hdmimode "1080p60hz"
-
-### voutmode : hdmi or dvi
 setenv voutmode "hdmi"
-# setenv voutmode "dvi"
-
-### CVBS encoder : 480CVBS or 576CVBS
-#   "480cvbs"   | NTSC, 480i
-#   "576cvbs"   | PAL, 576i
-#setenv cvbsmode "576cvbs"
-
-# Display Auto Detection
-# "false" or "true"
 setenv display_autodetect "true"
-
-### Custom modeline
-# setenv hdmimode "custombuilt"
-### 2560x1440p60hz sample
-# setenv modeline "2560,1440,241500,88800,60,2560,2608,2640,2720,1440,1442,1447,1481,1,1,1"
-
-# disable vu7
-setenv disable_vu7 "false"
-
-# invert touch screen x,y
-setenv touch_invert_x "false"
-setenv touch_invert_y "false"
-
-# Display Zoom Rate
+setenv backlight_pwm "yes"
 setenv zoom_rate "100"
-
+setenv colorattribute "444,8bit"
 setenv osd_reverse "0"
 setenv video_reverse "0"
-
-setenv colorattribute "444,8bit"
-
 setenv suspend_hdmiphy "1"
+setenv cvbsmode "576cvbs"
+setenv disablehpd "false"
+setenv disable_vu7 "false"
+setenv touch_invert_x "false"
+setenv touch_invert_y "false"
+setenv test_mt_vid "0000"
+setenv test_mt_pid "0000"
+setenv max_freq_a73 "1800"
+setenv max_freq_a53 "1896"
+setenv governor_a73 "performance"
+setenv governor_a53 "performance"
+setenv enable_wol "0"
 setenv heartbeat "1"
 setenv sg_tablesize "2"
 setenv prevent_sleep "0"
-############################################################
-#
-# CPU
-#
-############################################################
 
-### A73 max cpu frequency sets
-# setenv max_freq_a73 "1992" # 1.992GHz
-# setenv max_freq_a73 "1932" # 1.932GHz
-# setenv max_freq_a73 "1920" # 1.920GHz
-# setenv max_freq_a73 "1908" # 1.908GHz
-# setenv max_freq_a73 "1800" # 1.800GHz
-# setenv max_freq_a73 "1704" # 1.704GHz
-setenv max_freq_a73 "1800"
-setenv governor_a73 "performance"
+###################
+# ini load & read
+###################
 
-### A53 max cpu frequency sets
-# setenv max_freq_a53 "1992" # 1.992GHz
-# setenv max_freq_a53 "1896" # 1.896GHz
-# setenv max_freq_a53 "1704" # 1.704GHz
-setenv max_freq_a53 "1896"
-setenv governor_a53 "performance"
+setenv iniloadaddr "0x4001000"
+load ${devtype} ${devnum} ${iniloadaddr} env.ini
+ini display ${iniloadaddr}
+ini cpu ${iniloadaddr}
+ini etc ${iniloadaddr}
 
-setenv test_mt_vid "0000"
-setenv test_mt_pid "0000"
-
-# Enable backlight_pwm
-# disable : backlight "no"
-# ODROID-VU5/7 : backlight "yes"
-# ODROID-VU8 : backlight "invert"
-setenv backlight_pwm "yes"
-
-
-# gpio power key :  GPIOX.3 (Pin 11) of 2x20 pins connector
-#setenv gpiopower "479"
-
-############################################################
-#
+###################
 # Boot args
-#
-############################################################
-
-# Wake on Lan
-setenv enable_wol "0"
-
-# HPD enable/disable option
-setenv disablehpd "false"
+###################
 
 # Init args
 setenv rootopt "rootfstype=ramfs init=/init"
@@ -154,7 +66,7 @@ setenv logo "${display_layer},loaded,${fb_addr}"
 # Boot Arguments
 if test "${display_autodetect}" = "true"; then hdmitx edid; fi
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
-if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
+if test "${hdmimode}" = "custombuilt"; then ini iniaddr Custombuilt;setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
 
 setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode} ${miscopt}"
 

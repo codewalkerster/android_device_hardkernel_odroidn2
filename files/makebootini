@@ -1,7 +1,8 @@
 #!/bin/sh
-if [ -e "/odm/boot.ini" ]
+if [ -e "/odm/boot.ini" -a -e "/odm/env.ini" ]
 then
     break
 else
     cp /vendor/etc/boot.ini.template /odm/boot.ini
+    cp /vendor/etc/env.ini.template /odm/env.ini
 fi
