@@ -7,3 +7,6 @@ hide.screenshot_button=false
 hide.poweroff_button=false
 media.audio_hal.device=0
 dev.usbhub.reset=0
+ro.chip=s922
+ro.url.official=https://dn.odroid.com/S922X/ODROID-N2/Android/
+ro.url.mirror=https://www.odroid.in/mirror/dn.odroid.com/S922X/ODROID-N2/Android/
