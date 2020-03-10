@@ -21,10 +21,8 @@ setenv touch_invert_x "false"
 setenv touch_invert_y "false"
 setenv test_mt_vid "0000"
 setenv test_mt_pid "0000"
-setenv max_freq_a73 "1800"
-setenv max_freq_a53 "1896"
-setenv governor_a73 "performance"
-setenv governor_a53 "performance"
+setenv max_freq_big "1800"
+setenv max_freq_little "1896"
 setenv enable_wol "0"
 setenv heartbeat "1"
 setenv sg_tablesize "2"
@@ -68,7 +66,7 @@ if test "${display_autodetect}" = "true"; then hdmitx edid; fi
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
 if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
 
-setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_a73} max_freq_a53=${max_freq_a53} ${cmode} ${miscopt}"
+setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_big} max_freq_a53=${max_freq_little} ${cmode} ${miscopt}"
 
 setenv bootargs "${initargs} ${androidopt} ${displayopt} logo=${logo} cvbsmode=${cvbsmode} hdmimode=${hdmimode} voutmode=${voutmode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
 
