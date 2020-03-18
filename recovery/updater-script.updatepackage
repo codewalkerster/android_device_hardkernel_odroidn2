@@ -54,6 +54,12 @@ run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtlwifi.ko");
 #mount("vfat", "EMMC", "/dev/block/odm", "/odm");
 #run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
 
+ui_print("   edit /odm/boot.ini...");
+mount("vfat", "EMMC", "/dev/block/odm", "/odm");
+run_program("/sbin/sed", "-i", "86isetenv prevent_sleep \"0\"", "/odm/boot.ini");
+run_program("/sbin/sed", "-i", "s/phy}\ usb/phy}\ prevent_sleep=${prevent_sleep}\ usb/g", "/odm/boot.ini");
+
+
 ui_print("   change permission for makedefaultprop");
 run_program("/sbin/chmod", "755", "/vendor/bin/makedefaultprop");
 run_program("/sbin/chown", "root:shell", "/vendor/bin/makedefaultprop");
