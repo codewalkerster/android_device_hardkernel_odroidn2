@@ -41,6 +41,12 @@ run_program("/sbin/dd", "if=/tmp/recovery.img", "of=/dev/block/recovery");
 
 set_progress(0.5000);
 
+ui_print("   'logo' partition is flashing...");
+package_extract_file("hardkernel-720.bmp.gz", "/tmp/hardkernel-720.bmp.gz");
+run_program("/sbin/dd", "if=/tmp/hardkernel-720.bmp.gz", "of=/dev/block/logo");
+
+set_progress(0.6000);
+
 ui_print("   'vendor' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
 package_extract_dir("vendor", "/vendor");
@@ -58,6 +64,7 @@ run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/odm/.env.ini.update");
 run_program("/vendor/bin/update_ini.sh", "/boot.ini", "/odm/env.ini", "/odm/.env.ini.update");
 run_program("/sbin/mv", "/odm/.env.ini.update", "/odm/env.ini");
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/odm/boot.ini");
+run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/odm/boot-logo.bmp.gz");
 
 #ui_print("   edit /odm/boot.ini...");
 #mount("vfat", "EMMC", "/dev/block/odm", "/odm");
@@ -72,7 +79,7 @@ run_program("/sbin/chown", "root:shell", "/vendor/bin/makedefaultprop");
 ui_print("   remove lowmemorykiller config files.");
 run_program("/sbin/rm", "-rf", "/vendor/etc/lowmemorykiller*.txt");
 
-set_progress(0.6000);
+set_progress(0.7000);
 
 ui_print("   'system' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/system", "/system");
@@ -94,7 +101,7 @@ run_program("/sbin/chown", "root:shell", "/system/bin/screencontrol");
 run_program("/sbin/chmod", "755", "/vendor/bin/hw/vendor.hardkernel.hardware.odroidthings@1.0-service");
 run_program("/sbin/chown", "root:shell", "/vendor/bin/hw/vendor.hardkernel.hardware.odroidthings@1.0-service");
 
-set_progress(0.7500);
+set_progress(0.800);
 
 ui_print("   'product' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/product", "/product");

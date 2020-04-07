@@ -17,6 +17,7 @@ $(PRODUCT_OUT)/updatepackage.zip: \
 	mkdir -p $(PKGDIR)/META-INF/com/google/android
 	cp -a $(UBOOT)/u-boot.bin $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/boot.img $(PKGDIR)
+	cp -a $(PRODUCT_OUT)/hardkernel-720.bmp.gz $(PKGDIR)
 	cp -a $(DTB) $(PKGDIR)
 	cp -ad $(PRODUCT_OUT)/vendor $(PKGDIR)
 	find $(PKGDIR)/vendor -type l | xargs rm -rf
