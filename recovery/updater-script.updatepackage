@@ -64,6 +64,7 @@ run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/odm/.env.ini.update");
 run_program("/vendor/bin/update_ini.sh", "/boot.ini", "/odm/env.ini", "/odm/.env.ini.update");
 run_program("/sbin/mv", "/odm/.env.ini.update", "/odm/env.ini");
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/odm/boot.ini");
+run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
 run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/odm/boot-logo.bmp.gz");
 
 #ui_print("   edit /odm/boot.ini...");
