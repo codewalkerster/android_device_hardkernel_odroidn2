@@ -7,7 +7,7 @@ SEDCOMMAND="/odm/.sedcommand"
 #should three argus, $1 - boot.ini, $2 - env.ini, $3 applied ini file.
 if [[ -f "$TARGET" ]]; then
 	# using env.ini, $2
-	while read KEY VALUE ETC
+	while IFS='=' read KEY VALUE ETC
 	do
 		if [[ "$Keys" == *"$KEY"* ]]; then
 			command echo "s/^$KEY=\".*\"/$KEY=$VALUE/" >> $SEDCOMMAND
@@ -15,14 +15,14 @@ if [[ -f "$TARGET" ]]; then
 	done < $2
 else
 	# using boot.ini, $1
-	while read KEY VALUE ETC
+	while read SET KEY VALUE ETC
 	do
 		if [[ "$SET" == "setenv" ]]; then
 			if [[ "$Keys" == *"$KEY"* ]]; then
 				command echo "s/^$KEY=\".*\"/$KEY=$VALUE/" >> $SEDCOMMAND
 			fi
 		fi
-	done < $2
+	done < $1
 fi
 
 # apply patch to .env.ini.update, $3
