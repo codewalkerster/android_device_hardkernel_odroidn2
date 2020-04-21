@@ -61,7 +61,9 @@ mount("vfat", "EMMC", "/dev/block/odm", "/odm");
 
 run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/odm/.env.ini.update");
 # parse env values from boot or env ini files and apply it to .env.ini.update
-run_program("/vendor/bin/update_ini.sh", "/boot.ini", "/odm/env.ini", "/odm/.env.ini.update");
+run_program("/sbin/chmod", "755", "/vendor/bin/update_ini.sh");
+run_program("/sbin/chown", "root:shell", "/vendor/bin/update_ini.sh");
+run_program("/vendor/bin/update_ini.sh", "/odm/boot.ini", "/odm/env.ini", "/odm/.env.ini.update");
 run_program("/sbin/mv", "/odm/.env.ini.update", "/odm/env.ini");
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/odm/boot.ini");
 run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
