@@ -6,7 +6,7 @@ FIRST_UPDATE_DIR := first_update
 
 UBOOT := bootloader/uboot/sd_fuse
 KERNEL :=$(PRODUCT_OUT)/obj/KERNEL_OBJ
-DTB := $(KERNEL)/arch/arm64/boot/dts/amlogic/meson64_odroidn2_android.dtb
+DTB_IMG := $(PRODUCT_OUT)/dtbs.img
 
 $(PRODUCT_OUT)/updatepackage.zip: \
 	build_bootloader bootimage \
@@ -18,7 +18,7 @@ $(PRODUCT_OUT)/updatepackage.zip: \
 	cp -a $(UBOOT)/u-boot.bin $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/boot.img $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/hardkernel-720.bmp.gz $(PKGDIR)
-	cp -a $(DTB) $(PKGDIR)
+	cp -a $(DTB_IMG) $(PKGDIR)
 	cp -ad $(PRODUCT_OUT)/vendor $(PKGDIR)
 	find $(PKGDIR)/vendor -type l | xargs rm -rf
 	diff -srq $(PKGDIR)/vendor $(FIRST_UPDATE_DIR)/vendor | grep identical | awk -F ' ' '{print $$2}' | xargs rm -rf

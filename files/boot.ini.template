@@ -54,6 +54,8 @@ setenv miscopt "disable_vu7=${disable_vu7} ${touchopt} zoom_rate=${zoom_rate} ${
 
 # dtbs & boot addr
 setenv dtb_mem_addr 0x1000000
+setenv dtboaddr 0x1080000
+setenv cramfsaddr 0x20000000
 setenv loadaddr 0x1080000
 
 # logo
@@ -62,7 +64,9 @@ setenv fb_addr "0x3d800000"
 setenv logo "${display_layer},loaded,${fb_addr}"
 
 # Boot Arguments
-if test "${display_autodetect}" = "true"; then hdmitx edid; fi
+if test "${display_autodetect}" = "true"; then
+	hdmitx edid;
+fi
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
 if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
 
@@ -70,9 +74,18 @@ setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_
 
 setenv bootargs "${initargs} ${androidopt} ${displayopt} logo=${logo} cvbsmode=${cvbsmode} hdmimode=${hdmimode} voutmode=${voutmode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
 
-movi read boot 0 ${loadaddr}
-movi read dtbs 0 ${dtb_mem_addr}
+movi read dtbs 0 ${cramfsaddr}
+cramfsload ${dtb_mem_addr} meson64_odroidn2_android.dtb
 fdt addr ${dtb_mem_addr}
-if test "${heartbeat}" = "0"; then fdt set /leds/blueled linux,default-trigger "none"; fi
+fdt resize ${overlays_resize}
+for overlay in ${overlays}; do
+	cramfsload ${dtboaddr} ${overlay}.dtbo
+	fdt apply ${dtboaddr}
+done
+
+movi read boot 0 ${loadaddr}
+if test "${heartbeat}" = "0"; then
+	fdt set /leds/blueled linux,default-trigger "none";
+fi
 booti ${loadaddr} - ${dtb_mem_addr}
 bootm

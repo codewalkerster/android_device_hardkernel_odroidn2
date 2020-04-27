@@ -17,7 +17,7 @@
 SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
 BOOT_IMG := $(PRODUCT_OUT)/boot.img
-DTBS := meson64_odroidn2_android.dtb
+DTBS := $(PRODUCT_OUT)/dtbs.img
 SELFINSTALL_BOOT_INI := boot.ini
 SELF_SRC_DIR := device/hardkernel/$(PRODUCT_DIR)/selfinstall
 MKFS_FAT := device/hardkernel/proprietary/bin/mkfs.fat
@@ -83,7 +83,7 @@ $(SELFINSTALL_ODM_IMAGE): \
 	$(INSTALLED_RECOVERYIMAGE_TARGET)
 	dd if=/dev/zero of=$@ bs=512 count=66526
 	$(MKFS_FAT) -F16 -n VFAT $@
-	$(FAT16COPY) $@ $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/arm64/boot/dts/amlogic/$(DTBS) \
+	$(FAT16COPY) $@ \
 		$(SELF_SRC_DIR)/$(SELFINSTALL_BOOT_INI) \
 		$(INSTALLED_RECOVERYIMAGE_TARGET)
 
@@ -95,6 +95,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	$(INSTALLED_RECOVERYIMAGE_TARGET) \
 	build_bootloader \
 	$(BOOT_IMG) \
+	$(DTBS) \
 	$(SELFINSTALL_CACHE_IMAGE) \
 	$(SELFINSTALL_ODM_IMAGE)
 	@echo "Creating installable single image file..."
@@ -102,7 +103,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	dd if=$(PRODUCT_OUT)/u-boot.bin of=$@ conv=fsync bs=512 seek=1
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=2056
 	dd if=$(PRODUCT_OUT)/hardkernel-720.bmp.gz of=$@ conv=fsync bs=512 seek=2064
-	dd if=$(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/arm64/boot/dts/amlogic/$(DTBS) of=$@ conv=fsync bs=512 seek=6160
+	dd if=$(DTBS) of=$@ conv=fsync bs=512 seek=6160
 	dd if=$(BOOT_IMG) of=$@ conv=fsync bs=512 seek=6416
 	dd if=$(INSTALLED_RECOVERYIMAGE_TARGET) of=$@ conv=fsync bs=512 seek=39184
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88336
