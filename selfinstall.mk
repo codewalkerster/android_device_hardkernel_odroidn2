@@ -107,6 +107,11 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	dd if=$(INSTALLED_RECOVERYIMAGE_TARGET) of=$@ conv=fsync bs=512 seek=39184
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88336
 	dd if=$(SELFINSTALL_ODM_IMAGE) of=$@ conv=fsync bs=512 seek=2185488 count=66526
+	echo -e \
+		"n\np\n1\n" \
+		"2185488\n2251023\n" \
+		"t\n4\nw\n" \
+		|fdisk $@ >/dev/null #2>&1
 	sync
 	@echo "Done."
 
