@@ -49,6 +49,13 @@ service makedefaultprop /vendor/bin/makedefaultprop
     disabled
     oneshot
 
+service afrd /vendor/bin/afrd
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+
 on property:dev.bootcomplete=1
     start makebootini
     start makedefaultprop

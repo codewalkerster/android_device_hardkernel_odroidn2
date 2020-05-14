@@ -104,6 +104,10 @@ run_program("/sbin/chown", "root:shell", "/system/bin/screencontrol");
 run_program("/sbin/chmod", "755", "/vendor/bin/hw/vendor.hardkernel.hardware.odroidthings@1.0-service");
 run_program("/sbin/chown", "root:shell", "/vendor/bin/hw/vendor.hardkernel.hardware.odroidthings@1.0-service");
 
+#afrd
+run_program("/sbin/chmod", "755", "/vendor/bin/afrd");
+run_program("/sbin/chown", "root:shell", "/vendor/bin/afrd");
+
 set_progress(0.800);
 
 ui_print("   'product' partition is extracting...");

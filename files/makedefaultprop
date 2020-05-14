@@ -6,6 +6,12 @@ else
     cp /vendor/etc/default.prop.template /odm/default.prop
 fi
 
+if [ -e "/odm/afrd.ini" ]
+then
+    break
+else
+    cp /vendor/etc/afrd.ini.template /odm/afrd.ini
+fi
 
 USB3_IRQ=`cat /proc/interrupts | grep "xhci-hcd:usb1" | awk -F : '{print $1}'`
 echo 4 > /proc/irq/$(($USB3_IRQ))/smp_affinity_list
