@@ -81,7 +81,7 @@ $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 .PHONY: $(SELFINSTALL_ODM_IMAGE)
 $(SELFINSTALL_ODM_IMAGE): \
 	$(INSTALLED_RECOVERYIMAGE_TARGET)
-	dd if=/dev/zero of=$@ bs=512 count=66526
+	dd if=/dev/zero of=$@ bs=512 count=65536
 	$(MKFS_FAT) -F16 -n VFAT $@
 	$(FAT16COPY) $@ $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/arm64/boot/dts/amlogic/$(DTBS) \
 		$(SELF_SRC_DIR)/$(SELFINSTALL_BOOT_INI) \
@@ -106,7 +106,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	dd if=$(BOOT_IMG) of=$@ conv=fsync bs=512 seek=6416
 	dd if=$(INSTALLED_RECOVERYIMAGE_TARGET) of=$@ conv=fsync bs=512 seek=39184
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88336
-	dd if=$(SELFINSTALL_ODM_IMAGE) of=$@ conv=fsync bs=512 seek=2185488 count=66526
+	dd if=$(SELFINSTALL_ODM_IMAGE) of=$@ conv=fsync bs=512 seek=2185488 count=65536
 	echo -e \
 		"n\np\n1\n" \
 		"2185488\n2251023\n" \
