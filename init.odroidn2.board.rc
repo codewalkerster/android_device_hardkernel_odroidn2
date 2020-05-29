@@ -5,6 +5,8 @@ on early-init
     mount configfs configfs /sys/kernel/config
     #mount usbfs none /proc/bus/usb
     insmod /vendor/lib/modules/mali.ko
+    insmod /vendor/lib/modules/spidev.ko
+    insmod /vendor/lib/modules/spi-meson-spicc.ko
 
 on init
 
