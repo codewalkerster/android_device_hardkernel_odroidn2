@@ -40,12 +40,9 @@ $(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/hardkernel/common/products/mbox/product_mbox.mk)
 $(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
-#########################################################################
-#
-#                                               Media extension
-#
-#########################################################################
+
 TARGET_WITH_MEDIA_EXT_LEVEL := 4
+
 #########################################################################
 #
 #                     media ext
@@ -124,10 +121,6 @@ TARGET_PARTITION_DTSI := partition_mbox_ab_avb.dtsi
 endif
 else
 TARGET_NO_RECOVERY := false
-
-#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-
-BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 TARGET_PARTITION_DTSI := partition_mbox_normal_P_64.dtsi
@@ -391,6 +384,10 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0 \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cp_system_other_odex=1
+
 endif
 
 # Superuser
