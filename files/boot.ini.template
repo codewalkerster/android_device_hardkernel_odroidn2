@@ -83,6 +83,10 @@ for overlay in ${overlays}; do
 	fdt apply ${dtboaddr}
 done
 
+# Load opp table
+cramfsload ${dtboaddr} odroid${variant}-opp.dtbo
+fdt apply ${dtboaddr}
+
 movi read boot 0 ${loadaddr}
 if test "${heartbeat}" = "0"; then
 	fdt set /leds/blueled linux,default-trigger "none";
