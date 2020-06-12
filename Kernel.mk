@@ -10,6 +10,11 @@ INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 
 KERNEL_DEVICETREE := meson64_odroidn2_android
+DTB_OUT := $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/$(KERNEL_ARCH)/boot/dts/amlogic
+DTBO_OUT := $(DTB_OUT)/overlays/odroidn2
+KERNEL_DTBO += $(DTBO_OUT)/*.dtbo
+INTERMEDIATES_DTBS := $(PRODUCT_OUT)/dtbs
+
 KERNEL_DEFCONFIG := odroidn2_android_defconfig
 KERNEL_ARCH := arm64
 
@@ -19,7 +24,9 @@ INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
 TARGET_AMLOGIC_INT_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/uImage
 TARGET_AMLOGIC_INT_RECOVERY_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image_recovery
 
-BOARD_VENDOR_KERNEL_MODULES += \
+BOARD_VENDOR_KERNEL_MODULES    += \
+							   $(PRODUCT_OUT)/obj/lib_vendor/spidev.ko \
+							   $(PRODUCT_OUT)/obj/lib_vendor/spi-meson-spicc.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
 BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
@@ -80,7 +87,15 @@ savekernelconfig: $(KERNEL_OUT) $(KERNEL_CONFIG)
 build-modules-quick:
 	    $(media-modules)
 
-$(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) | $(ACP)
+$(INTERMEDIATES_DTBS): $(INTERMEDIATES_KERNEL)
+	mkdir -p $(INTERMEDIATES_DTBS)
+	cp $(DTB_OUT)/$(KERNEL_DEVICETREE).dtb $(KERNEL_DTBO) \
+		$(INTERMEDIATES_DTBS)
+
+$(PRODUCT_OUT)/dtbs.img: $(INTERMEDIATES_DTBS)
+	mkfs.cramfs $^ $@
+
+$(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) $(PRODUCT_OUT)/dtbs.img | $(ACP)
 	@echo "Kernel installed"
 	$(transform-prebuilt-to-target)
 
