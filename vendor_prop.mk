@@ -68,9 +68,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #ro.vendor.platform.support.dtsmulasset=true
 #DTS-HD prop end
 # Enable player buildin
-
-
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES +=  \
     media.support.dolbyvision = false
 
 #add for video boot, 1 means use video boot, others not .
