@@ -1,5 +1,5 @@
 #!/sbin/sh
-Keys="hdmimode voutmode display_autodetect backlight_pwm zoom_rate colorattribute osd_reverse video_reverse suspend_hdmiphy cvbsmode disablehpd disable_vu7 touch_invert_x touch_invert_y test_mt_vid test_mt_pid max_freq_a73 max_freq_53 governor_a73 governor_a53 enable_wol heartbeat sg_tablesize adjustScreenWay screenAlignment autoFramerate"
+Keys="hdmimode voutmode display_autodetect backlight_pwm zoom_rate colorattribute osd_reverse video_reverse suspend_hdmiphy cvbsmode disablehpd disable_vu7 touch_invert_x touch_invert_y test_mt_vid test_mt_pid max_freq_a73 max_freq_53 governor_a73 governor_a53 enable_wol heartbeat sg_tablesize adjustScreenWay screenAlignment autoFramerate gpuScaleMode overlays overlay_resize"
 
 TARGET="/odm/env.ini"
 SEDCOMMAND="/odm/.sedcommand"
