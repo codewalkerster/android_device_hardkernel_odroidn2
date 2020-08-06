@@ -11,3 +11,4 @@ ro.chip=s922
 ro.url.official=https://dn.odroid.com/S922X/ODROID-N2/Android/pie/64/
 ro.url.mirror=https://www.odroid.in/mirror/dn.odroid.com/S922X/ODROID-N2/Android/pie/64/
 kiosk_mode=false
+mouse_acceleration=true
