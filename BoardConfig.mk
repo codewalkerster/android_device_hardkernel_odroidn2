@@ -178,3 +178,6 @@ BOARD_VNDK_VERSION := current
 
 BOARD_HAVE_ODROID_GPS := true
 BOARD_SUPPORT_EXTERNAL_GPS := true
+
+SUPERUSER_EMBEDDED := true
+SUPERUSER_PACKAGE_PREFIX := com.android.settings.cyanogenmod.superuser
