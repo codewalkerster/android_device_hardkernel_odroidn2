@@ -99,6 +99,7 @@ run_program("/sbin/chmod", "755", "/system/bin/fw_setenv");
 run_program("/sbin/chmod", "755", "/system/bin/fw_printenv");
 run_program("/sbin/chmod", "755", "/system/bin/screencontrol");
 run_program("/sbin/chown", "root:shell", "/system/bin/screencontrol");
+run_program("/sbin/chmod", "751", "/system/xbin/su");
 
 run_program("/system/bin/fw_setenv", "loadaddr", "0x1080000");
 run_program("/system/bin/fw_setenv", "cramfsaddr", "0x20000000");
