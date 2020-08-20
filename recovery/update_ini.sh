@@ -10,7 +10,11 @@ if [[ -f "$TARGET" ]]; then
 	while IFS='=' read KEY VALUE ETC
 	do
 		if [[ "$Keys" == *"$KEY"* ]]; then
-			command echo "s/^$KEY=\".*\"/$KEY=$VALUE/" >> $SEDCOMMAND
+			if [[ "Keys" == "overlays" ]]; then
+				command echo "s/^$KEY=\".*\"/$KEY=\"pwm_cd pwm_ef ${VALUE:1}/" >> $SEDCOMMAND
+			else
+				command echo "s/^$KEY=\".*\"/$KEY=$VALUE/" >> $SEDCOMMAND
+			fi
 		fi
 	done < $2
 else
