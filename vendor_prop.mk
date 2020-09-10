@@ -55,7 +55,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.vendor.platform.support.dolby=false
+    ro.vendor.platform.support.dolby=true
 
 #DTS decoder option
 #display dts icon when playback
@@ -79,10 +79,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     drm.service.enabled=1
 
-#set memory upper limit for extractor process
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.media.maxmem=629145600
-
 #map volume
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.audio.mapvalue=0,0,0,0
@@ -92,22 +88,18 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     service.adb.tcp.port=5555
 
 #enable/disable afbc
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES +=  \
     vendor.afbcd.enable=1
 
-# default disable sdr to hdr
+# default enable sdr to hdr
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.sdr2hdr.enable=false
+    ro.vendor.sdr2hdr.enable=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0
 
+
+
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.hdmi.device_type=4
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.platform.support.network_led=true
-
-#default media vol ,max 15
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.media_vol_default=8
