@@ -58,6 +58,13 @@ service afrd /vendor/bin/afrd
     disabled
     oneshot
 
+service makepanic /vendor/bin/makepanic 30
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+
 on property:dev.bootcomplete=1
     start makebootini
     start makedefaultprop
@@ -65,3 +72,6 @@ on property:dev.bootcomplete=1
 on property:dev.usbhub.reset=1
     write /sys/devices/platform/gpio-reset/reset-usb_hub/control "reset"
     setprop dev.usbhub.reset 0
+
+on property:sys.force_reboot=1
+    start makepanic

@@ -129,4 +129,5 @@ PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn2/files/default.prop.template:vendor/etc/default.prop.template \
     device/hardkernel/odroidn2/files/makedefaultprop:vendor/bin/makedefaultprop \
     device/hardkernel/odroidn2/files/env.ini.template:vendor/etc/env.ini.template \
+    device/hardkernel/odroidn2/files/makepanic:vendor/bin/makepanic \
     device/hardkernel/odroidn2/recovery/update_ini.sh:vendor/bin/update_ini.sh
