@@ -87,15 +87,16 @@ savekernelconfig: $(KERNEL_OUT) $(KERNEL_CONFIG)
 build-modules-quick:
 	    $(media-modules)
 
-$(INTERMEDIATES_DTBS): $(INTERMEDIATES_KERNEL)
-	mkdir -p $(INTERMEDIATES_DTBS)
+$(INTERMEDIATES_DTBS): $(KERNEL_CONFIG)
+	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) dtbs
+	mkdir -p $@
 	cp $(DTB_OUT)/$(KERNEL_DEVICETREE).dtb $(KERNEL_DTBO) \
-		$(INTERMEDIATES_DTBS)
+		$@
 
 $(PRODUCT_OUT)/dtbs.img: $(INTERMEDIATES_DTBS)
 	mkfs.cramfs $^ $@
 
-$(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) $(PRODUCT_OUT)/dtbs.img | $(ACP)
+$(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) dtbsimage | $(ACP)
 	@echo "Kernel installed"
 	$(transform-prebuilt-to-target)
 
@@ -104,6 +105,8 @@ $(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) $(PRODUCT_OUT)/dtbs.img | $(
 $(BOARD_VENDOR_KERNEL_MODULES): $(INSTALLED_KERNEL_TARGET)
 	@echo "BOARD_VENDOR_KERNEL_MODULES: $(BOARD_VENDOR_KERNEL_MODULES)"
 
+.PHONY: dtbsimage
+dtbsimage: $(PRODUCT_OUT)/dtbs.img
 
 .PHONY: bootimage-quick
 bootimage-quick: $(INTERMEDIATES_KERNEL)
