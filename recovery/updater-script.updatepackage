@@ -67,6 +67,7 @@ run_program("/vendor/bin/update_ini.sh", "/odm/boot.ini", "/odm/env.ini", "/odm/
 run_program("/sbin/mv", "/odm/.env.ini.update", "/odm/env.ini");
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/odm/boot.ini");
 run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
+run_program("/sbin/cp", "/vendor/etc/usb_modeswitch.conf.template", "/odm/usb_modeswitch.conf");
 run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/odm/boot-logo.bmp.gz");
 
 #ui_print("   edit /odm/boot.ini...");
@@ -113,6 +114,10 @@ run_program("/sbin/chown", "root:shell", "/vendor/bin/hw/vendor.hardkernel.hardw
 #afrd
 run_program("/sbin/chmod", "755", "/vendor/bin/afrd");
 run_program("/sbin/chown", "root:shell", "/vendor/bin/afrd");
+
+#usb_modeswitch
+run_program("/sbin/chmod", "755", "/vendor/bin/usb_modeswitch");
+run_program("/sbin/chown", "root:shell", "/vendor/bin/usb_modeswitch");
 
 set_progress(0.800);
 

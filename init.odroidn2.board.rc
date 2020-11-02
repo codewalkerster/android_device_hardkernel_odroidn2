@@ -58,6 +58,11 @@ service afrd /vendor/bin/afrd
     disabled
     oneshot
 
+service usb_modeswitch /vendor/bin/usb_modeswitch -W -c /odm/usb_modeswitch.conf
+    class main
+    disabled
+    oneshot
+
 on property:dev.bootcomplete=1
     start makebootini
     start makedefaultprop

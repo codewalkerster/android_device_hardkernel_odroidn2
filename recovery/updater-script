@@ -40,6 +40,7 @@ mount("vfat", "EMMC", "/dev/block/odm", "/sdcard");
 mount("ext4", "EMMC", "/dev/block/vendor", "/vendor");
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/sdcard/boot.ini");
 run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/sdcard/default.prop");
+run_program("/sbin/cp", "/vendor/etc/usb_modeswitch.conf.template", "/sdcard/usb_modeswitch.conf");
 run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/sdcard/boot-logo.bmp.gz");
 run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/sdcard/env.ini");
 

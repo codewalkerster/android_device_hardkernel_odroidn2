@@ -23,4 +23,11 @@ if [ -f /sys/class/net/eth0/queues/rx-0/rps_cpus ]; then
     echo f > /sys/class/net/eth0/queues/rx-0/rps_cpus
 fi
 
+if [ -e "/odm/usb_modeswitch.conf" ]
+then
+    break
+else
+    cp /vendor/etc/usb_modeswitch.conf.template /odm/usb_modeswitch.conf
+fi
+
 echo "Finish"

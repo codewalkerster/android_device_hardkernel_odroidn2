@@ -1,0 +1,4 @@
+DefaultVendor= 0x0bda
+DefaultProduct=0x1a2b
+
+StandardEject=1
