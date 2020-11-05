@@ -127,6 +127,9 @@ package_extract_dir("product", "/product");
 
 set_progress(0.9000);
 
+ui_print("   Remove /cache/update.zip");
+run_program("/sbin/rm", "-rf", "/cache/update.zip");
+
 ui_print("Android update is completed.\nHave fun with ODROID-N2!\n\n");
 set_progress(1.0000);
 
