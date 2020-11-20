@@ -3,6 +3,10 @@
 show_progress(1.0000, 0);
 
 ui_print("\n\nHardkernel's ODROID-N2 Android Update is started...");
+
+ui_print("   resizing the partition table...");
+oem_fdisk();
+
 set_progress(0.1000);
 
 ui_print("   'system' partition is flashing...");
@@ -43,6 +47,7 @@ run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/sdcard/default.pr
 run_program("/sbin/cp", "/vendor/etc/usb_modeswitch.conf.template", "/sdcard/usb_modeswitch.conf");
 run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/sdcard/boot-logo.bmp.gz");
 run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/sdcard/env.ini");
+run_program("/sbin/touch", "/sdcard/firstboot");
 
 set_progress(0.8000);
 

@@ -21,6 +21,7 @@ DTBS := $(PRODUCT_OUT)/dtbs.img
 SELFINSTALL_BOOT_INI := boot.ini
 SELF_SRC_DIR := device/hardkernel/$(PRODUCT_DIR)/selfinstall
 MKFS_FAT := device/hardkernel/proprietary/bin/mkfs.fat
+MPT_DUMP := device/hardkernel/$(PRODUCT_DIR)/files/mpt.dump
 
 VENDOR := vendor.img
 
@@ -101,6 +102,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).img: \
 	@echo "Creating installable single image file..."
 	dd if=/dev/urandom of=$@ conv=fsync bs=512 seek=1920 count=144 # 72K Bytes
 	dd if=$(PRODUCT_OUT)/u-boot.bin of=$@ conv=fsync bs=512 seek=1
+	dd if=$(MPT_DUMP) of=$@ conv=fsync bs=512 seek=2048
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=2056
 	dd if=$(PRODUCT_OUT)/hardkernel-720.bmp.gz of=$@ conv=fsync bs=512 seek=2064
 	dd if=$(DTBS) of=$@ conv=fsync bs=512 seek=6160
