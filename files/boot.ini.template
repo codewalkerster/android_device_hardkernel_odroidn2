@@ -67,10 +67,22 @@ setenv logo "${display_layer},loaded,${fb_addr}"
 if test "${display_autodetect}" = "true"; then
 	hdmitx edid;
 fi
+
+# Set boot device
+if test "${devtype}" = "mmc"; then
+	setenv boot_device "mmcblk${devnum}"
+else
+	if test "${devnum}" = "0"; then
+		setenv boot_device "sda"
+	else
+		setenv boot_device "sdb"
+	fi
+fi
+
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
 if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
 
-setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_big} max_freq_a53=${max_freq_little} ${cmode} ${miscopt}"
+setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_big} max_freq_a53=${max_freq_little} ${cmode} ${miscopt} boot_device=${boot_device}"
 
 setenv bootargs "${initargs} ${androidopt} ${displayopt} logo=${logo} cvbsmode=${cvbsmode} hdmimode=${hdmimode} voutmode=${voutmode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} gpiopower=${gpiopower} enable_wol=${enable_wol}"
 
