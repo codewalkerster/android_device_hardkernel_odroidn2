@@ -22,7 +22,7 @@ PRODUCT_DIR := odroidn2
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
 #
-ANDROID_BUILD_TYPE := 64
+#ANDROID_BUILD_TYPE := 64
 TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
 
 # Inherit from those products. Most specific first.
