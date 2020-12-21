@@ -24,16 +24,16 @@ INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
 TARGET_AMLOGIC_INT_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/uImage
 TARGET_AMLOGIC_INT_RECOVERY_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image_recovery
 
-BOARD_VENDOR_KERNEL_MODULES    += \
-							   $(PRODUCT_OUT)/obj/lib_vendor/spidev.ko \
-							   $(PRODUCT_OUT)/obj/lib_vendor/spi-meson-spicc.ko
+BOARD_VENDOR_KERNEL_MODULES	+= \
+	$(PRODUCT_OUT)/obj/lib_vendor/spidev.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/spi-meson-spicc.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/cp210x.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/ch341.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/ftdi_sio.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/pl2303.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
-BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
-BOARD_VENDOR_KERNEL_MODULES     += $(PRODUCT_OUT)/obj/lib_vendor/cp210x.ko
-BOARD_VENDOR_KERNEL_MODULES     += $(PRODUCT_OUT)/obj/lib_vendor/ch341.ko
-BOARD_VENDOR_KERNEL_MODULES     += $(PRODUCT_OUT)/obj/lib_vendor/ftdi_sio.ko
-BOARD_VENDOR_KERNEL_MODULES     += $(PRODUCT_OUT)/obj/lib_vendor/pl2303.ko
+BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_WIFI_KERNEL_MODULES)
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
@@ -54,6 +54,7 @@ $(KERNEL_OUT):
 	mkdir -p $(KERNEL_OUT)
 
 $(KERNEL_CONFIG): $(KERNEL_OUT)
+	@echo "make defconfig"
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(KERNEL_DEFCONFIG)
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
@@ -87,11 +88,10 @@ savekernelconfig: $(KERNEL_OUT) $(KERNEL_CONFIG)
 build-modules-quick:
 	    $(media-modules)
 
-$(INTERMEDIATES_DTBS): $(KERNEL_CONFIG)
-	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) dtbs
-	mkdir -p $@
+$(INTERMEDIATES_DTBS): $(INTERMEDIATES_KERNEL)
+	mkdir -p $(INTERMEDIATES_DTBS)
 	cp $(DTB_OUT)/$(KERNEL_DEVICETREE).dtb $(KERNEL_DTBO) \
-		$@
+		$(INTERMEDIATES_DTBS)
 
 $(PRODUCT_OUT)/dtbs.img: $(INTERMEDIATES_DTBS)
 	mkfs.cramfs $^ $@
