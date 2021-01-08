@@ -492,6 +492,18 @@ service bugreport /system/bin/dumpstate -d -p -B -P -z \
     class main
     disabled
     oneshot
+
+service touch_show /system/bin/settings --user 0 put system show_touches ${sys.showtouch}
+    class core
+    user shell
+    group shell
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+on property:sys.showtouch=*
+    start touch_show
+
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.odroidn2
