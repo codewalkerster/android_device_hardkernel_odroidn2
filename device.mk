@@ -37,7 +37,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
-    device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles_V1_0.xml \
+    device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0_hevc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0_hevc.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0_h264.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0_h264.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
