@@ -131,5 +131,5 @@ PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn2/files/default.prop.template:vendor/etc/default.prop.template \
     device/hardkernel/odroidn2/files/makedefaultprop:vendor/bin/makedefaultprop \
     device/hardkernel/odroidn2/files/env.ini.template:vendor/etc/env.ini.template \
-    device/hardkernel/odroidn2/recovery/update_ini.sh:vendor/bin/update_ini.sh \
+    device/hardkernel/odroidn2/recovery/apply_ini.sh:vendor/bin/apply_ini.sh \
     device/hardkernel/odroidn2/files/usb_modeswitch.conf.template:vendor/etc/usb_modeswitch.conf.template
