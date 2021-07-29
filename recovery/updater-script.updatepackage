@@ -64,12 +64,17 @@ run_program("/sbin/rm", "-rf", "/vendor/lib/modules/rtlwifi.ko");
 ui_print("   update the odm partition...");
 mount("vfat", "EMMC", "/dev/block/odm", "/odm");
 
-run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/odm/.env.ini.update");
-# parse env values from boot or env ini files and apply it to .env.ini.update
-run_program("/sbin/chmod", "755", "/vendor/bin/update_ini.sh");
-run_program("/sbin/chown", "root:shell", "/vendor/bin/update_ini.sh");
-run_program("/vendor/bin/update_ini.sh", "/odm/boot.ini", "/odm/env.ini", "/odm/.env.ini.update");
-run_program("/sbin/mv", "/odm/.env.ini.update", "/odm/env.ini");
+# Create env.ini file
+if
+  sha1_check(read_file("/odm/env.ini")) == ""
+then
+run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/odm/env.ini");
+# parse env.ini values from boot.ini format file and apply it to env.ini format file
+run_program("/sbin/chmod", "755", "/vendor/bin/apply_ini.sh");
+run_program("/sbin/chown", "root:shell", "/vendor/bin/apply_ini.sh");
+run_program("/vendor/bin/apply_ini.sh", "/odm/boot.ini", "/odm/env.ini");
+endif;
+
 run_program("/sbin/cp", "/vendor/etc/boot.ini.template", "/odm/boot.ini");
 run_program("/sbin/cp", "/vendor/etc/default.prop.template", "/odm/default.prop");
 run_program("/sbin/cp", "/vendor/etc/usb_modeswitch.conf.template", "/odm/usb_modeswitch.conf");
