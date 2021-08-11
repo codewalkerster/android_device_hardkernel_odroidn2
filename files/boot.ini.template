@@ -29,6 +29,13 @@ setenv sg_tablesize "2"
 setenv prevent_sleep "0"
 
 ###################
+# dtbo  configs
+###################
+
+setenv overlays "uart0"
+setenv overlays_resize 16384
+
+###################
 # ini load & read
 ###################
 
