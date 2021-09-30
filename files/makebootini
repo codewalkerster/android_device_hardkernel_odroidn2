@@ -6,31 +6,3 @@ else
     cp /vendor/etc/boot.ini.template /odm/boot.ini
     cp /vendor/etc/env.ini.template /odm/env.ini
 fi
-
-BROADMCOM=0
-REALTEK=0
-
-#Automatically change prop feature.disable_bt in default.prop
-devs=$(lsusb | awk '{print $6}')
-
-for dev in $devs;
-do
-    if [ "$dev" = "0a12:0001" ]; then
-        echo "found CSR B/T"
-        BROADMCOM=1
-    fi
-    if [ "$dev" = "0bda:c820" ]; then
-        echo "found Realtek Combo B/T"
-        REALTEK=1
-    fi
-done
-
-if [ $BROADMCOM -eq 1 ] || [ $REALTEK -eq 1 ]; then
-    sed -i 's/feature.disable_bt=true/feature.disable_bt=false/' /odm/default.prop
-    setprop feature.disable_bt true
-fi
-
-if [ $BROADMCOM -eq 0 ] && [ $REALTEK -eq 0 ]; then
-    sed -i 's/feature.disable_bt=false/feature.disable_bt=true/' /odm/default.prop
-    setprop feature.disable_bt false
-fi
