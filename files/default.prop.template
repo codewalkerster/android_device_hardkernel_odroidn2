@@ -13,4 +13,4 @@ ro.url.mirror=www.odroid.in/mirror/dn.odroid.com/S922X/ODROID-N2/Android/pie/32/
 kiosk_mode=false
 mouse_acceleration=true
 media.settings.xml=vendor/etc/media_profiles_V1_0_h264.xml
-feature.disable_bt=false
+feature.disable_bt=true
