@@ -70,3 +70,7 @@ on property:dev.bootcomplete=1
 on property:dev.usbhub.reset=1
     write /sys/devices/platform/gpio-reset/reset-usb_hub/control "reset"
     setprop dev.usbhub.reset 0
+
+on post-fs-data
+    insmod /vendor/lib/modules/btrtl.ko
+    insmod /vendor/lib/modules/btusb.ko
