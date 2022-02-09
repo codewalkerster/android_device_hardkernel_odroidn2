@@ -74,3 +74,5 @@ on property:dev.usbhub.reset=1
 on post-fs-data
     insmod /vendor/lib/modules/btrtl.ko
     insmod /vendor/lib/modules/btusb.ko
+    insmod /vendor/lib/modules/hid-multitouch.ko
+    insmod /vendor/lib/modules/dwav-usb-mt.ko
