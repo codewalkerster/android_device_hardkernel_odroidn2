@@ -30,7 +30,11 @@ BOARD_VENDOR_KERNEL_MODULES	+= \
 	$(PRODUCT_OUT)/obj/lib_vendor/cp210x.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/ch341.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/ftdi_sio.ko \
-	$(PRODUCT_OUT)/obj/lib_vendor/pl2303.ko
+	$(PRODUCT_OUT)/obj/lib_vendor/pl2303.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/btrtl.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/btusb.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/hid-multitouch.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/dwav-usb-mt.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_WIFI_KERNEL_MODULES)
