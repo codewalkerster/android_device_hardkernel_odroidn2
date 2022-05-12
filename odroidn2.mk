@@ -412,8 +412,12 @@ PRODUCT_PACKAGES += \
 # Prebuilt app
 PRODUCT_PACKAGES += \
     CMFileManager \
-    LightningBrowser \
+    LightningBrowser
+
+ifeq ($(TARGET_BUILD_VARIANT),eng)
+PRODUCT_PACKAGES += \
     AndroidTerm
+endif
 
 # Updater
 PRODUCT_PACKAGES += updater
