@@ -21,5 +21,4 @@ feature.disable_bt=true
 #ignore_no_internet=true
 
 # if you are using VPN with ethernet,
-# set wifi_priority_high=false
-#wifi_priority_high=false
+# setprop persist.wifi_priority_high false
