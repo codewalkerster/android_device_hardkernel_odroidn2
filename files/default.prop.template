@@ -10,7 +10,6 @@ dev.usbhub.reset=0
 ro.chip=s922
 ro.url.official=dn.odroid.com/S922X/ODROID-N2/Android/pie/64/
 ro.url.mirror=www.odroid.in/mirror/dn.odroid.com/S922X/ODROID-N2/Android/pie/64/
-kiosk_mode=false
 mouse_acceleration=true
 media.settings.xml=vendor/etc/media_profiles_V1_0_h264.xml
 feature.disable_bt=true
