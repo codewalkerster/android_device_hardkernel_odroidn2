@@ -17,8 +17,7 @@ feature.disable_bt=true
 
 # if you do not want any dialogs and notifications
 # for no internet connection,
-# set ignore_no_internet=true
-#ignore_no_internet=true
+# setprop persist.ignore_no_internet true
 
 # if you are using VPN with ethernet,
 # setprop persist.wifi_priority_high false
