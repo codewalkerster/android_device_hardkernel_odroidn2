@@ -100,6 +100,11 @@ for overlay in ${overlays}; do
 	fdt apply ${dtboaddr}
 done
 
+for overlay in ${user_overlays}; do
+	load ${devtype} ${devnum} ${dtboaddr} ${overlay}.dtbo
+	fdt apply ${dtboaddr}
+done
+
 # Load opp table
 cramfsload ${dtboaddr} odroid${variant}-opp.dtbo
 fdt apply ${dtboaddr}
