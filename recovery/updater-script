@@ -49,11 +49,6 @@ run_program("/sbin/cp", "/vendor/etc/hardkernel-720.bmp.gz", "/sdcard/boot-logo.
 run_program("/sbin/cp", "/vendor/etc/env.ini.template", "/sdcard/env.ini");
 run_program("/sbin/touch", "/sdcard/firstboot");
 
-set_progress(0.8000);
-
-ui_print("    Change CPU Clock for N2 plus...");
-run_program("sbin/sh", "/sbin/change_cpufreq.sh");
-
 unmount("/vendor");
 unmount("/sdcard");
 
