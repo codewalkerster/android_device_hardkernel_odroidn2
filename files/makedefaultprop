@@ -30,9 +30,17 @@ else
     cp /vendor/etc/usb_modeswitch.conf.template /odm/usb_modeswitch.conf
 fi
 
+HARDWARE=`cat /proc/cpuinfo | grep Hardware`
+N2PLUS="N2Plus"
+
 if [ -f /odm/firstboot ]; then
     resize2fs /dev/block/data
     rm /odm/firstboot
+    if [ -z "${HARDWARE##*$N2PLUS*}" ]
+    then
+        sed -i s/_big=\"1800\"/_big=\"2208\"/g /odm/env.ini;
+        sed -i s/_little=\"1896\"/_little=\"1908\"/g /odm/env.ini;
+    fi
 fi
 
 echo "Finish"
