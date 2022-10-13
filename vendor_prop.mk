@@ -104,3 +104,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.hdmi.device_type=4
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.omx.out_buffer1=3
