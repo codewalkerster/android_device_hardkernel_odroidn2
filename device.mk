@@ -36,13 +36,17 @@ PRODUCT_PACKAGES += \
     move_widevine_data.sh
 
 PRODUCT_COPY_FILES += \
+    device/hardkernel/$(PRODUCT_DIR)/files/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
+    device/hardkernel/$(PRODUCT_DIR)/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0_hevc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0_hevc.xml \
+    device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0_hevc_cctv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0_hevc_cctv.xml \
     device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0_h264.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0_h264.xml \
-    device/hardkernel/$(PRODUCT_DIR)/files/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
-    device/hardkernel/$(PRODUCT_DIR)/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    device/hardkernel/$(PRODUCT_DIR)/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
+    device/hardkernel/$(PRODUCT_DIR)/files/media_profiles_V1_0_h264_cctv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0_h264_cctv.xml \
+    device/hardkernel/$(PRODUCT_DIR)/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
+
+PRODUCT_COPY_FILES += \
     device/hardkernel/$(PRODUCT_DIR)/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
     device/hardkernel/$(PRODUCT_DIR)/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
     device/hardkernel/$(PRODUCT_DIR)/files/remote.tab1:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab1 \
