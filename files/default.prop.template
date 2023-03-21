@@ -18,3 +18,5 @@ media.settings.xml=vendor/etc/media_profiles_V1_0_h264.xml
 
 # if you are using VPN with ethernet,
 # setprop persist.wifi_priority_high false
+
+ro.surface_flinger.primary_display_orientation=ORIENTATION_0
