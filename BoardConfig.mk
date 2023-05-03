@@ -46,7 +46,7 @@ TARGET_NO_BOOTLOADER := false
 TARGET_NO_KERNEL := false
 TARGET_NO_RADIOIMAGE := true
 
-TARGET_BOARD_PLATFORM := odroidn2
+TARGET_BOARD_PLATFORM := g12b
 TARGET_BOOTLOADER_BOARD_NAME := odroidn2
 
 # Allow passing `--second` to mkbootimg via 2ndbootloader.
@@ -73,6 +73,9 @@ HWC_PRIMARY_CONNECTOR_TYPE := "hdmi"
 #HWC_ENABLE_PRIMARY_HOTPLUG := true
 #HWC_ENABLE_SECURE_LAYER_PROCESS := true
 #HWC_DISABLE_CURSOR_PLANE := true
+#panel does not support AFBC in default
+HWC_PRIMARY_DISP_SUPPORT_AFBC := false
+HWC_EXTEND_DISP_SUPPORT_AFBC := true
 
 # Camera
 USE_CAMERA_STUB := false

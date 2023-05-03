@@ -18,12 +18,10 @@
 #
 
 PRODUCT_DIR := odroidn2
-
+ANDROID_BUILD_TYPE := 64
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
-#
-ANDROID_BUILD_TYPE := 64
-TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
+#TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
 
 # Inherit from those products. Most specific first.
 ifeq ($(ANDROID_BUILD_TYPE), 64)
@@ -33,8 +31,6 @@ else
 $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
-
-BOARD_INSTALL_VULKAN := true
 
 $(call inherit-product, device/hardkernel/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/hardkernel/common/products/mbox/product_mbox.mk)
@@ -338,13 +334,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.pppoe=true
 endif
-
-#################################################################################
-#
-#                                                DEFAULT LOWMEMORYKILLER CONFIG
-#
-#################################################################################
-BUILD_WITH_LOWMEM_COMMON_CONFIG := true
 
 BOARD_USES_USB_PM := true
 
