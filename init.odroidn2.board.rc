@@ -28,7 +28,7 @@ on boot
     chmod 666 /sys/class/sii9233a/enable
     chmod 666 /sys/module/tvin_vdin/parameters/max_buf_num
 
-    # chmod 0666 /dev/ge2d
+    chmod 0666 /dev/ge2d
     chmod 666 /dev/cec
 
 #NET LED
