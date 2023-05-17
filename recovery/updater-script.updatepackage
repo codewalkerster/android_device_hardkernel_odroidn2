@@ -98,6 +98,13 @@ set_progress(0.7000);
 ui_print("   'system' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/system", "/system");
 package_extract_dir("system", "/system");
+if
+  sha1_check(read_file("system/framework/arm/boot-core-oj.vdex")) == ""
+then
+  ui_print("   Make symlink");
+  run_program("/sbin/ln", "-sf", "/system/framework/boot-core-oj.vdex", "/system/framework/arm/boot-core-oj.vdex");
+  run_program("/sbin/ln", "-sf", "/system/framework/boot-core-oj.vdex", "/system/framework/arm64/boot-core-oj.vdex");
+endif;
 
 if
   sha1_check(read_file("/system/etc/g.prop")) != ""
