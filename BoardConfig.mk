@@ -163,6 +163,7 @@ include device/hardkernel/common/sepolicy.mk
 #MALLOC_IMPL := dlmalloc
 MALLOC_SVELTE := true
 
+WITH_DEXPREOPT := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
