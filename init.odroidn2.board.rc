@@ -44,6 +44,13 @@ service makebootini /vendor/bin/makebootini
     disabled
     oneshot
 
+service boblight /vendor/bin/boblight
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+
 service makedefaultprop /vendor/bin/makedefaultprop
     class core
     user root
@@ -64,6 +71,7 @@ service usb_modeswitch /vendor/bin/usb_modeswitch -W -c /odm/usb_modeswitch.conf
     oneshot
 
 on property:dev.bootcomplete=1
+    start boblight
     start makebootini
     start makedefaultprop
 

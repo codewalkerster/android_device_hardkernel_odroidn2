@@ -1,0 +1,14 @@
+#!/bin/sh
+if [ -e "/data/data/org.xbmc.kodi" ];
+then
+    if [ -e "/data/data/org.xbmc.kodi/files/libboblight.so" ];
+    then
+        echo "libboblight.so exist"
+    else
+        cp /vendor/lib64/hw/libboblight.so /data/data/org.xbmc.kodi/files/libboblight.so
+        chmod 666 /data/data/org.xbmc.kodi/files/libboblight.so
+    fi
+    /vendor/bin/boblightd
+else
+    echo "kodi is not installed"
+fi
