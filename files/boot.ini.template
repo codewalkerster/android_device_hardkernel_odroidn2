@@ -88,7 +88,7 @@ else
 fi
 
 # TODO -> if test "${display_autodetect}" = "true"; then usb pwren; hdmitx edid; fi
-if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline} customwidth=${customwidth} customheight=${customheight}"; fi
+if test "${hdmimode}" = "custombuilt"; then setenv cmode "modeline=${modeline}"; fi
 
 setenv initargs "${rootopt} ${consoleopt} ${ramoopsopt} max_freq_a73=${max_freq_big} max_freq_a53=${max_freq_little} ${cmode} ${miscopt} boot_device=${boot_device}"
 
