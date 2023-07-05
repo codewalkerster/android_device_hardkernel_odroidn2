@@ -143,6 +143,7 @@ ui_print("   Remove /cache/update.zip");
 run_program("/sbin/rm", "-rf", "/cache/update.zip");
 
 mount("vfat", "EMMC", "/dev/block/odm", "/sdcard");
+run_program("/sbin/sed", "-i", "s/^[[:blank:]]setenv[[:blank:]]bootargs.*${recoveryargs}\"/\tsetenv bootargs \"${initargs} ${androidopt} ${displayopt} logo=${logo} cvbsmode=${cvbsmode} hdmimode=${hdmimode} voutmode=${voutmode} cvbscable=${cvbscable} osd_reverse=${osd_reverse} video_reverse=${video_reverse} ${recoveryargs}\"/g", "/sdcard/boot.ini");
 run_program("/sbin/touch", "/sdcard/firstboot");
 unmount("/sdcard");
 
