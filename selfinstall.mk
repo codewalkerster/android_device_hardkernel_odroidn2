@@ -83,6 +83,8 @@ $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 $(SELFINSTALL_ODM_IMAGE): \
 	$(INSTALLED_RECOVERYIMAGE_TARGET)
 	dd if=/dev/zero of=$@ bs=512 count=65536
+	mkdir -p $(SELF_SRC_DIR)
+	cp $(SELF_SRC_DIR)/../files/boot.ini.template $(SELF_SRC_DIR)/$(SELFINSTALL_BOOT_INI)
 	$(MKFS_FAT) -F16 -n VFAT $@
 	$(FAT16COPY) $@ \
 		$(SELF_SRC_DIR)/$(SELFINSTALL_BOOT_INI) \
