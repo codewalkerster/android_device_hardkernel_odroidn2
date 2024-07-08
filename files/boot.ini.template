@@ -27,7 +27,7 @@ setenv enable_wol "0"
 setenv heartbeat "1"
 setenv sg_tablesize "2"
 setenv prevent_sleep "0"
-setenv hdr_policy "0"
+setenv hdr_policy "1"
 setenv fullcolorrange "false"
 setenv 4k "no"
 
